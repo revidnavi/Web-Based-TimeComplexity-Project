@@ -1,3 +1,5 @@
+const saveapi = "http://localhost/Web-Based-TimeComplexity-Project/save.php"
+
 function bubbleSort(arr) {
     let n = arr.length;
     for (let i = 0; i < n; i++) {
@@ -40,7 +42,7 @@ function runAlgorithm() {
     Complexity: ${complexity.space} | Estimated
     Space Used: ${space} bytes
     `;
-    fetch("save.php", {
+    fetch(saveapi, {
         method: "POST",
         headers: {
             "Content-Type":
@@ -50,19 +52,4 @@ function runAlgorithm() {
             size, time, algo, space
         })
     });
-}// , () => Math.random());
-
-let start = performance.now();
-
-bubbleSort(arr);
-
-let end = performance.now();
-let time = end - start;
-
-document.getElementById("result").innerText = "Execution Time: " + time + " ms";
-fetch("save.php", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ size, time })
-});
-// }
+}

@@ -14,7 +14,7 @@ CREATE TABLE users (
     activated BOOLEAN DEFAULT TRUE
 );
 
-INSERT INTO users (username, email, hashed_pass) VALUES (0,0,0)
+INSERT INTO users (username, email, hashed_pass) VALUES (0,0,0); -- temporary while no create user feature
 
 CREATE TABLE results (
     id INT AUTO_INCREMENT PRIMARY KEY,

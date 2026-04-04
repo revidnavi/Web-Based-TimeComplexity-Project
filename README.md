@@ -26,9 +26,6 @@ CREATE TABLE results (
     execution_time FLOAT,
     space_usage BIGINT,
 
-    time_complexity VARCHAR(32),
-    space_complexity VARCHAR(32),
-
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );

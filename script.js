@@ -1,4 +1,6 @@
-const LINK = 'http://localhost/Web-Based-TimeComplexity-Project';
+const PROJECT_LINK = 'http://localhost/Web-Based-TimeComplexity-Project';
+const API_LINK = PROJECT_LINK + '/api';
+const SAVERESULT_LINK = API_LINK + '/save_result.php'
 
 function bubbleSort(arr) {
     let n = arr.length;
@@ -45,7 +47,7 @@ async function runAlgorithm() {
         Space Used: ${space} bytes
     `;
 
-    const result = await fetch(`${LINK}/api/save_result.php`, {
+    const result = await fetch(SAVERESULT_LINK, {
         method: "POST",
         headers: {
             "Content-Type":

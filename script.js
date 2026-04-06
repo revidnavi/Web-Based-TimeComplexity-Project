@@ -1,4 +1,6 @@
-const saveapi = "http://localhost/Web-Based-TimeComplexity-Project/save.php"
+const PROJECT_LINK = 'http://localhost/Web-Based-TimeComplexity-Project';
+const API_LINK = PROJECT_LINK + '/api';
+const SAVERESULT_LINK = API_LINK + '/save_result.php'
 
 function bubbleSort(arr) {
     let n = arr.length;
@@ -79,13 +81,14 @@ function getComplexity(algorithm) {
 
 function estimateSpace(arr) {
     // Rough estimation: number of elements * 8 bytes(JS number)
-    return arr.length * 8; // bytes
+    return arr.length * 8;
 }
 
-function runAlgorithm() {
+async function runAlgorithm() {
     let size = document.getElementById("size").value;
     let algo = document.getElementById("algorithm").value;
     let arr = Array.from({ length: size }, () => Math.random());
+
     let start = performance.now();
     if (algo === "bubble") bubbleSort(arr);
     if (algo === "merge") mergeSort(arr);
@@ -101,17 +104,19 @@ function runAlgorithm() {
     if(algo === "recursive")  fibonacciRecursive(Math.min(size, 38));
     if(algo === "dp") fibonacciDP(size);
     let end = performance.now();
+
     let time = end - start;
     let complexity = getComplexity(algo);
     let space = estimateSpace(arr);
-    document.getElementById("result").innerText = 
-    `
-    Execution Time: ${time} ms | Time
-    Complexity: ${complexity.time} | Space
-    Complexity: ${complexity.space} | Estimated
-    Space Used: ${space} bytes
+
+    document.getElementById("result").innerText = `
+        Execution Time: ${time} ms | Time
+        Complexity: ${complexity.time} | Space
+        Complexity: ${complexity.space} | Estimated
+        Space Used: ${space} bytes
     `;
-    fetch(saveapi, {
+
+    const result = await fetch(SAVERESULT_LINK, {
         method: "POST",
         headers: {
             "Content-Type":
@@ -121,4 +126,6 @@ function runAlgorithm() {
             size, time, algo, space
         })
     });
+    const data = await result.json();
+    console.log(data);
 }

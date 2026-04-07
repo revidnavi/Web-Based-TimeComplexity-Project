@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complexity Analyzer</title>
+</head>
+<body>
+    <div id="signupForm"> 
+        <input type="text" id="signupEmail">
+        <input type="number" id="emailCode">
+        <button id="sendCodeButton">Send New Code</button>
+        <input type="password" id="signupPass0">
+        <input type="password" id="signupPass1">
+        <button id="signupButton">Sign Up</button>
+        <p>
+            Already have an account? 
+            <u id="gotoLogin"style="cursor: pointer;">Log In</u>
+        </p>
+    </div>
+    <div id="loginForm"> 
+        <input type="text" id="loginEmail">
+        <input type="password" id="loginPass">
+        <button id="loginButton">Log In</button>
+        <p>
+            Don't have an account? 
+            <u id="gotoSignup"style="cursor: pointer;">Sign Up</u>
+        </p>
+    </div>
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>

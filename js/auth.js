@@ -76,6 +76,13 @@ async function signup() {
     const data = await result.json();
 
     console.log(data); // replace with popup
+
+    if (data.success === true) {
+        document.getElementById("signupEmail").value = "";
+        document.getElementById("emailCode").value = "";
+        document.getElementById("signupPass0").value = "";
+        document.getElementById("signupPass1").value = "";
+    }
 }
 
 async function login() {

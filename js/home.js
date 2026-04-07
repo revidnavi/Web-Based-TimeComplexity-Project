@@ -1,6 +1,10 @@
-const PROJECT_LINK = 'http://localhost/Web-Based-TimeComplexity-Project';
-const API_LINK = PROJECT_LINK + '/api';
-const SAVERESULT_LINK = API_LINK + '/save_result.php'
+import { SAVERESULT_LINK, AUTHENTICATION_LINK, LOGOUT_LINK } from '../config.js';
+import { checklogin } from '../lib/authenticate.js';
+
+checklogin(AUTHENTICATION_LINK);
+
+document.getElementById("runButton").addEventListener("click", runAlgorithm);
+document.getElementById("logoutButton").addEventListener("click", logout);
 
 function bubbleSort(arr) {
     let n = arr.length;
@@ -127,5 +131,18 @@ async function runAlgorithm() {
         })
     });
     const data = await result.json();
+
+    if (data.redirect) {
+        window.location.href = data.redirect;
+    }
+
     console.log(data);
+}
+
+async function logout() {
+    const result = await fetch(LOGOUT_LINK);
+    const data = await result.json();
+    if (data.success) {
+        window.location.href = "auth.html";
+    }
 }

@@ -1,9 +1,10 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
-require 'PHPMailer/src/Exception.php';
+
+require 'PHPMailer-7.0.2/src/PHPMailer.php';
+require 'PHPMailer-7.0.2/src/SMTP.php';
+require 'PHPMailer-7.0.2/src/Exception.php';
 require_once __DIR__ . '/../config.php';
 
 function sendEmail($to, $subject, $body) {

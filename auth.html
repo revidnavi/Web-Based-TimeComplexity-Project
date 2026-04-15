@@ -3,30 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/reset.css">
     <title>Complexity Analyzer</title>
 </head>
 <body>
-    <div id="signupForm"> 
-        <input type="text" id="signupEmail">
-        <input type="number" id="emailCode">
-        <button id="sendCodeButton">Send New Code</button>
-        <input type="password" id="signupPass0">
-        <input type="password" id="signupPass1">
-        <button id="signupButton">Sign Up</button>
-        <p>
-            Already have an account? 
-            <u id="gotoLogin"style="cursor: pointer;">Log In</u>
-        </p>
+    <!-- Logo -->
+    <div class="logo-container">
+        <div class="logo">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="currentColor" opacity="0.8"/>
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+        </div>
+        <div class="logo-text">
+            <span class="logo-title">AlgoSpark</span>
+            <span class="logo-subtitle">Complexity Analyzer</span>
+        </div>
     </div>
-    <div id="loginForm"> 
-        <input type="text" id="loginEmail">
-        <input type="password" id="loginPass">
-        <button id="loginButton">Log In</button>
-        <p>
-            Don't have an account? 
-            <u id="gotoSignup"style="cursor: pointer;">Sign Up</u>
-        </p>
+
+    <!-- Login/Signup Page -->
+    <div id="form-card">
+    
+        <div class="title-header">
+           <h1>Welcome</h1>
+            <p>Sign in or create account to analyze algorithms</p>
+       </div>
+
+        <div class="auth-card">
+            <div class="tab-group">
+                <button class="tab active" id="gotoLogin">Login</button>
+                <button class="tab" id="gotoSignup">Sign Up</button>
+            </div>
+        </div>
+            
+        <div id="signupForm"> 
+        <div class="signup-content">
+            <label for="email">Email</label>
+            <input type="text" id="signupEmail" placeholder="Enter email" required>
+            <label>Password</label>
+            <input type="password" id="signupPass0" placeholder="Enter Password" required>
+            <label>Confirm Password</label>
+            <input type="password" id="signupPass1" placeholder="Confirm Password" required>
+            <!-- <input type="number" id="emailCode"> -->
+            <button id="sendCodeButton">Send Verification Code</button>
+            <!-- <button id="signupButton">Sign Up</button> -->
+        </div>
+        
     </div>
+    <div id="loginForm">
+        <div class="login-content">
+        <label for="email">Email</label>
+        <input type="text" id="loginEmail" placeholder="Enter email" required>
+        <label for="password">Password</label>
+        <input type="password" id="loginPass" placeholder="Enter password" required>
+        <button id="loginButton">Log In</button> 
+        </div>
+       
+    </div>
+    </div>
+    
     <script type="module" src="js/auth.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-import { API_URL } from '../config/front.js';
+import { API_URL } from '../config/frontend.js';
 
 showLogin();
 

@@ -1,4 +1,4 @@
-import { API_URL } from '../config/front.js';
+import { API_URL } from '../config/frontend.js';
 import { bubbleSort, mergeSort, binarySearch, linearSearch, fibonacciRecursive, fibonacciDP } from '../lib/algorithms.js';
 
 document.getElementById("runButton").addEventListener("click", runAlgorithm);

@@ -6,7 +6,7 @@ require_once __DIR__ . '/../config/back.php';
 require_once __DIR__ . '/../db/results.php';
 require_once __DIR__ . '/../lib/util.php';
 
-loginRedirect();
+loginBlock();
 
 $conn = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 $data = json_decode(file_get_contents("php://input"), true);

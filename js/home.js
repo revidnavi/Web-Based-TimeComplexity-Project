@@ -81,7 +81,7 @@ async function runAlgorithm() {
 }
 
 async function logout() {
-    const result = await fetch(API_URL+"/login.php");
+    const result = await fetch(API_URL+"/logout.php");
     const data = await result.json();
     if (data.success) {
         window.location.href = "auth.html";

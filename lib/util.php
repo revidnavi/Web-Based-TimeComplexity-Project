@@ -1,11 +1,8 @@
 <?php
-function loginRedirect() {
-    if (isset($_SESSION['user_id'])) {
-        echo json_encode(["redirect" => "home.html"]);
-    }
-    else {
+function loginBlock() {
+    if (!isset($_SESSION['user_id'])) {
         echo json_encode(["redirect" => "auth.html"]);
+        exit();
     }
-    exit();
 } 
 ?>

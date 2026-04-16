@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/json");
 
-require_once __DIR__ . '/../config/back.php';
+require_once __DIR__ . '/../config/backend.php';
 require_once __DIR__ . '/../db/signup_codes.php';
 require_once __DIR__ . '/../db/users.php';
 

@@ -16,9 +16,17 @@ function getComplexity(algorithm) {
     return map[algorithm];
 }
 
-function estimateSpace(arr) {
+function estimateSpace(arr, algo) {
     // Rough estimation: number of elements * 8 bytes(JS number)
-    return arr.length * 8;
+    const size = arr.length;
+    if (algo === "bubble" || algo === "binary" || algo === "linear") 
+        return size * 8;
+    else if (algo === "merge" || algo === "dp")
+        return size * 8 * 2;
+    else if (algo === "recursive")
+        return size * 8 * size;
+
+    return size * 8;
 }
 
 async function runAlgorithm() {
@@ -52,7 +60,7 @@ async function runAlgorithm() {
 
     let time = end - start;
     let complexity = getComplexity(algo);
-    let space = estimateSpace(arr);
+    let space = estimateSpace(arr, algo);
 
     document.getElementById("result").innerText = `
         Execution Time: ${time} ms | Time

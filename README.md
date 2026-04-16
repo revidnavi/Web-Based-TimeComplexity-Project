@@ -1,4 +1,17 @@
-# Web-Based-TimeComplexity-Project
+# Setup Guide
+## .gitignore files
+### "backend.php" in the "config" folder, do not forget to configure them:
+```php
+<?php
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_NAME', 'aco_db');
+define('PROJECT_NAME', 'AlgoSpark');
+define('PROJECT_EMAIL', 'algospark67@gmail.com');
+define('EMAIL_PASS', '');
+?>
+```
 
 ## Database Schema
 

@@ -1,75 +1,8 @@
-import { SAVERESULT_LINK, AUTHENTICATION_LINK, LOGOUT_LINK } from '../config.js';
-import { checklogin } from '../lib/authenticate.js';
-
-checklogin(AUTHENTICATION_LINK);
+import { API_URL } from '../config/front.js';
+import { bubbleSort, mergeSort, binarySearch, linearSearch, fibonacciRecursive, fibonacciDP } from '../lib/algorithms.js';
 
 document.getElementById("runButton").addEventListener("click", runAlgorithm);
 document.getElementById("logoutButton").addEventListener("click", logout);
-
-function bubbleSort(arr) {
-    let n = arr.length;
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < n - i - 1; j++) {
-            if (arr[j] > arr[j + 1]) {
-                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
-            }
-        }
-    }
-}
-
-function mergeSort(arr) {
-    let n = arr.length;
-    if (n <= 1) return arr;
-
-    const mid = Math.floor(n/2);
-    const left = mergeSort(arr.slice(0, mid));
-    const right = mergeSort(arr.slice(mid));
-
-    let i = 0, j = 0;
-    let result = []
-
-    while (i < left.length && j < right.length) {
-        if (left[i] <= right[j]) result.push(left[i++]);
-        else result.push(right[j++]);
-    }
-    return result.concat(left.slice(i)).concat(right.slice(j));
-}
-
-function binarySearch(arr, target) {
-    let n = arr.length;
-    let left = 0;
-    let right = n - 1;
-
-    while (left <= right) {
-        let mid = Math.floor((left + right) / 2);
-
-        if(arr[mid] === target) return mid;  
-        else if (arr[mid] < target) left = mid + 1;
-        else right = mid - 1;
-    }
-    return -1;
-}
-
-function linearSearch(arr, target) {
-    let n = arr.length;
-    for (let i = 0; i < n; i++) {
-        if(arr[i] === target) return i;
-    }
-    return -1;
-}
-
-function fibonacciRecursive(n) {
-    if (n <= 1) return n;
-    return fibonacciRecursive(n - 1) + fibonacciRecursive(n - 2);
-}
-
-function fibonacciDP(n){
-    let dp =[0, 1];
-    for (let i = 2; i <=n; i++) {
-        dp[i] = dp[i - 1] + dp[i -2];
-    }
-    return dp[n];
-}
 
 function getComplexity(algorithm) {
     const map = {
@@ -94,19 +27,27 @@ async function runAlgorithm() {
     let arr = Array.from({ length: size }, () => Math.random());
 
     let start = performance.now();
-    if (algo === "bubble") bubbleSort(arr);
-    if (algo === "merge") mergeSort(arr);
-    if (algo === "binary") {
+    if (algo === "bubble") {
+        bubbleSort(arr);
+    }
+    else if (algo === "merge") {
+        mergeSort(arr);
+    }
+    else if (algo === "binary") {
         arr.sort((a, b)=> a - b);
         let target = arr[Math.floor(Math.random()* arr.length)];
         binarySearch(arr, target);
     }
-    if (algo === "linear") {
+    else if (algo === "linear") {
         let target = arr[Math.floor(Math.random() * arr.length)];
         linearSearch(arr, target);
     }
-    if(algo === "recursive")  fibonacciRecursive(Math.min(size, 38));
-    if(algo === "dp") fibonacciDP(size);
+    else  if (algo === "recursive") {
+        fibonacciRecursive(Math.min(size, 38));
+    }
+    else if (algo === "dp") {
+        fibonacciDP(size);
+    }
     let end = performance.now();
 
     let time = end - start;
@@ -120,7 +61,7 @@ async function runAlgorithm() {
         Space Used: ${space} bytes
     `;
 
-    const result = await fetch(SAVERESULT_LINK, {
+    const result = await fetch(API_URL+"/save_result.php", {
         method: "POST",
         headers: {
             "Content-Type":
@@ -136,11 +77,11 @@ async function runAlgorithm() {
         window.location.href = data.redirect;
     }
 
-    console.log(data);
+    console.log(data); // replace with popup (if successful or not)
 }
 
 async function logout() {
-    const result = await fetch(LOGOUT_LINK);
+    const result = await fetch(API_URL+"/logout.php");
     const data = await result.json();
     if (data.success) {
         window.location.href = "auth.html";

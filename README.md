@@ -8,7 +8,7 @@ USE aco_db;
 
 CREATE TABLE signup_codes (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(32) UNIQUE,
+    email VARCHAR(32),
     code INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

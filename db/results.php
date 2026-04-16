@@ -1,6 +1,6 @@
 <?php
 function insertResult($conn, $user_id, $data) {
-    $algo = $data['algo'];
+    $algo_id = $data['algoID'];
     $size = $data['size'];
     $time = $data['time'];
     $space = $data['space'];
@@ -8,15 +8,15 @@ function insertResult($conn, $user_id, $data) {
     $stmt = $conn->prepare(
         "INSERT INTO results (
             user_id, 
-            algo, input_size, 
+            algo_id, input_size, 
             execution_time, space_usage
         ) 
         VALUES (?, ?, ?, ?, ?)"
     );
     $stmt->bind_param(
-        "isidd", 
+        "iiidd", 
         $user_id, 
-        $algo, $size, 
+        $algo_id, $size, 
         $time, $space
     );
     

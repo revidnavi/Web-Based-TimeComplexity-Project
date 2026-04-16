@@ -1,8 +1,168 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap");
 body {
-    font-family: Arial;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to bottom right, #dbeafe, #e0f2fe, #c7d2fe);
+    height: 100vh;
+    font-family: 'Inter', 'apple-system', 'BlinkMacSystemFont', 'Segoe UI', sans-serif;
+}
+
+/* Logo and Group Name*/
+
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    
+}
+    
+.logo-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2563eb;
+    line-height: 1;
+}
+
+.logo-subtitle {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+.logo {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    background: linear-gradient(to bottom right, #3b82f6, #1d4ed8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.logo svg {
+    width: 60%;
+    height: 60%;
+    color: white;
+}
+
+ /* Main Form for both Login and Signup */
+#form-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #fcfcfc;
+    padding: 1rem 2.5rem;
+    border-radius: 0.75rem;
+}
+
+ /* Login Form */
+
+#loginForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#loginEmail, #loginPass {
+    padding: 10px 0;
+    border-radius: 10px;
+    border: none;
+    background-color: #f1f5f9;
+}
+
+#loginButton {
+    font-weight: bold;
+    padding: 10px;
+    color: white;
+    background-color: #2563eb;
+    border-radius: 10px;
+    border: none;
+    margin-top: 20px;
+}
+
+/* Title Header */
+
+.title-header {
     text-align: center;
 }
 
-button {
+.title-header h1, .title-header p {
+     margin: 20px;
+}
+
+.title-header h1 {
+    font-size: 30px;
+}
+
+.title-header p {
+    color: #64748b;
+}
+
+/* Signup Form */
+
+#signupForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#signupEmail, #signupPass0, #signupPass1 {
+    padding: 10px 0;
+    border-radius: 10px;
+    border: none;
+    background-color: #f1f5f9;
+}
+
+#sendCodeButton {
+    font-weight: bold;
     padding: 10px;
+    color: white;
+    background-color: #2563eb;
+    border-radius: 10px;
+    border: none;
+}
+
+
+/* Tab Switcher */
+
+.tab-group {
+    display: flex;
+    justify-content: center;
+    background-color: #f1f5f9;
+    border-radius: 999px;
+    padding: 4px;
+    margin-bottom: 24px;
+    margin-top: 20px;
+}
+
+.tab {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    background: transparent;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6b7280;
+    cursor: pointer; 
+}
+
+.tab.active {
+    background-color: #fff;
+    color: #111827;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
 }

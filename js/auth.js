@@ -11,14 +11,19 @@ document.getElementById("loginButton").addEventListener("click",login);
 document.getElementById("sendCodeButton").addEventListener("click",requestEmailCode);
 document.getElementById("signupButton").addEventListener("click",signup);
 
+
 function showSignup() {
     document.getElementById("loginForm").style.display = "none";
-    document.getElementById("signupForm").style.display = "block";
+    document.getElementById("signupForm").style.display = "flex";
+    document.getElementById("gotoLogin").classList.remove("active");
+    document.getElementById("gotoSignup").classList.add("active");
 }
 
 function showLogin() {
     document.getElementById("signupForm").style.display = "none";
-    document.getElementById("loginForm").style.display = "block";
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("gotoSignup").classList.remove("active");
+    document.getElementById("gotoLogin").classList.add("active");
 }
 
 async function requestEmailCode() {

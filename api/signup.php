@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/json");
 
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../config/back.php';
 require_once __DIR__ . '/../db/signup_codes.php';
 require_once __DIR__ . '/../db/users.php';
 
@@ -18,14 +18,5 @@ if (!verifySignupCode($conn, $data['email'], $data['code'])) {
 
 $output = insertUser($conn, $data['email'], password_hash($data['pass0'], PASSWORD_DEFAULT));
 
-if ($output) {
-    echo json_encode([
-        "success" => true
-    ]);
-} 
-else {
-    echo json_encode([
-        "success" => false
-    ]);
-}
+echo json_encode(["success" => $output]);
 ?>

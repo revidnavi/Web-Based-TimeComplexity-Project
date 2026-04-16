@@ -1,4 +1,4 @@
-import { SIGNUPCODE_LINK, SIGNUP_LINK, LOGIN_LINK } from '../config.js';
+import { API_URL } from '../config/front.js';
 
 showLogin();
 
@@ -34,7 +34,7 @@ async function requestEmailCode() {
         return;
     }
 
-    const result = await fetch(SIGNUPCODE_LINK, {
+    const result = await fetch(API_URL+"/signup_code.php", {
         method: "POST",
         headers: {
             "Content-Type":
@@ -68,7 +68,7 @@ async function signup() {
         return;
     }
 
-    const result = await fetch(SIGNUP_LINK, {
+    const result = await fetch(API_URL+"/signup.php", {
         method: "POST",
         headers: {
             "Content-Type":
@@ -80,14 +80,21 @@ async function signup() {
     });
     const data = await result.json();
 
-    console.log(data); // replace with popup
+    console.log(data); // replace with popup (if successful or not)
+
+    if (data.success === true) {
+        document.getElementById("signupEmail").value = "";
+        document.getElementById("emailCode").value = "";
+        document.getElementById("signupPass0").value = "";
+        document.getElementById("signupPass1").value = "";
+    }
 }
 
 async function login() {
     const email =  document.getElementById("loginEmail").value.trim();
     const pass =  document.getElementById("loginPass").value.trim();
 
-    const result = await fetch(LOGIN_LINK, {
+    const result = await fetch(API_URL+"/login.php", {
         method: "POST",
         headers: {
             "Content-Type":
@@ -99,7 +106,7 @@ async function login() {
     });
     const data = await result.json();
 
-    console.log(data); // replace with popup
+    console.log(data); // replace with popup (if successful or not)
 
     if (data.redirect) {
         window.location.href = data.redirect;

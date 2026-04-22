@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <!-- Login/Signup Page -->
+    <!-- Signup Page -->
     <div id="form-card">
     
         <div class="title-header">
@@ -31,7 +31,7 @@
             <p>Sign in or create account to analyze algorithms</p>
        </div>
 
-        <div class="auth-card">
+         <div class="auth-card">
             <div class="tab-group">
                 <button class="tab active" id="gotoLogin">Login</button>
                 <button class="tab" id="gotoSignup">Sign Up</button>
@@ -40,25 +40,40 @@
             
         <div id="signupForm"> 
         <div class="signup-content">
-            <label for="email">Email</label>
+            <label>Email</label>
             <input type="text" id="signupEmail" placeholder="Enter email" required>
             <label>Password</label>
             <input type="password" id="signupPass0" placeholder="Enter Password" required>
             <label>Confirm Password</label>
             <input type="password" id="signupPass1" placeholder="Confirm Password" required>
-            <!-- <input type="number" id="emailCode"> -->
             <button id="sendCodeButton">Send Verification Code</button>
-            <!-- <button id="signupButton">Sign Up</button> -->
         </div>
-        
+
+        <!-- Verification Page -->
+        <div id="verifyPanel" style="display: none;">
+                <div class="verify-info">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <rect width="24" height="24" rx="4" fill="#eff6ff"/>
+                    <path d="M4 8l8 5 8-5" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/>
+                    <rect x="4" y="6" width="16" height="12" rx="2" stroke="#2563eb" stroke-width="1.5"/>
+                 </svg>
+                 <span id="verifyEmailLabel">Verification code sent to you@example.com</span>
+                </div>
+                <label>Enter 6-digit Code</label>
+                <input type="text" id="emailCode" placeholder="123456" maxlength="6" required>
+                <button id="signupButton">Verify & Create Account</button>
+                <button id="changeEmailButton">Change Email</button>
+        </div>
     </div>
+
+    <!-- Login Page -->
     <div id="loginForm">
         <div class="login-content">
         <label for="email">Email</label>
         <input type="text" id="loginEmail" placeholder="Enter email" required>
         <label for="password">Password</label>
         <input type="password" id="loginPass" placeholder="Enter password" required>
-        <button id="loginButton">Log In</button> 
+        <button id="loginButton" type="submit">Log In</button> 
         </div>
        
     </div>

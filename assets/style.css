@@ -9,6 +9,12 @@ body {
     font-family: 'Inter', 'apple-system', 'BlinkMacSystemFont', 'Segoe UI', sans-serif;
 }
 
+/* utilities */
+
+.hidden {
+    display: none;
+}
+
 /* Logo and Group Name*/
 
 
@@ -18,7 +24,6 @@ body {
     gap: 0.75rem;
     justify-content: center;
     margin-bottom: 1.5rem;
-    
 }
     
 .logo-title {
@@ -167,6 +172,63 @@ body {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
 }
 
+/* Verification Panel */
+
+#verifyPanel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+    padding: 16px;
+    border: 1.5px solid #bfdbfe ;
+    border-radius: 10px;
+    background-color: #eff6ff;
+}
+
+.verify-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #2563eb;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+.verify-info svg {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+}
+
+#emailCode {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1.5px solid #bfdbfe;
+    background-color: #fff;
+    font-size: 16px;
+    letter-spacing: 4px;
+}
+
+#signupButton {
+    font-weight: bold;
+    padding: 10px;
+    color: white;
+    background-color: #2563eb;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#changeEmailButton {
+    font-weight: bold;
+    padding: 10px;
+    color: #111827;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1.5px solid #e2e8f0;
+    cursor: pointer;
+}
 
 /* Home: Head tab card */
 

@@ -1,5 +1,4 @@
 # Setup Guide
-
 ## .gitignore files
 
 ### 1. config/backend.php:

@@ -77,7 +77,7 @@ CREATE TABLE results (
 
 ```sql
 INSERT INTO algorithms 
-(name, category, time_best, time_avg, time_worst, space_complexity)
+(algo_name, category, time_best, time_avg, time_worst, space_complexity)
 VALUES
 ('Bubble Sort', 'Sorting', 'O(n)', 'O(n^2)', 'O(n^2)', 'O(1)'),
 ('Merge Sort', 'Sorting', 'O(n log n)', 'O(n log n)', 'O(n log n)', 'O(n)'),

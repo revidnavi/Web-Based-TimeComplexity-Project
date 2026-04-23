@@ -80,5 +80,24 @@ VALUES
 ('Binary Search', 'Searching', 'O(1)', 'O(log n)', 'O(log n)', 'O(1)'),
 ('Linear Search', 'Searching', 'O(1)', 'O(n)', 'O(n)', 'O(1)'),
 ('Recursive Fibonacci', 'Computation', 'O(1)', 'O(2^n)', 'O(2^n)', 'O(n)'),
-('Dynamic Fibonacci', 'Computation', 'O(n)', 'O(n)', 'O(n)', 'O(n)');
+('Dynamic Fibonacci', 'Computation', 'O(n)', 'O(n)', 'O(n)', 'O(n)'); 
 ```
+
+## Project Structure
+
+### `app/` — Front-end (public-facing resources)
+- `*.html` — Individual pages of the application  
+- `assets/` — Static resources (images, CSS)  
+- `conf/` — Environment-specific JavaScript configuration variables  
+- `js/` — Page-specific JavaScript entry files  
+- `lib/` — Reusable JavaScript modules  
+  - `util.js` — General-purpose helper functions  
+
+### `server/` — Back-end (application logic and data handling)
+- `api/` — Request handlers for front-end interactions  
+  - Each subfolder corresponds to a specific page
+- `conf/` — Environment-specific PHP configuration variables  
+- `db/` — Data access layer for MySQL tables  
+  - Each file specialized in a specific table
+- `lib/` — Reusable PHP modules  
+  - `util.php` — General-purpose helper functions  

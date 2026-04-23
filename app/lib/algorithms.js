@@ -1,3 +1,4 @@
+
 export function bubbleSort(arr) {
     let n = arr.length;
     for (let i = 0; i < n; i++) {
@@ -8,6 +9,8 @@ export function bubbleSort(arr) {
         }
     }
 }
+
+
 
 export function mergeSort(arr) {
     let n = arr.length;
@@ -27,6 +30,8 @@ export function mergeSort(arr) {
     return result.concat(left.slice(i)).concat(right.slice(j));
 }
 
+
+
 export function binarySearch(arr, target) {
     let n = arr.length;
     let left = 0;
@@ -42,6 +47,8 @@ export function binarySearch(arr, target) {
     return -1;
 }
 
+
+
 export function linearSearch(arr, target) {
     let n = arr.length;
     for (let i = 0; i < n; i++) {
@@ -50,10 +57,14 @@ export function linearSearch(arr, target) {
     return -1;
 }
 
+
+
 export function fibonacciRecursive(n) {
     if (n <= 1) return n;
     return fibonacciRecursive(n - 1) + fibonacciRecursive(n - 2);
 }
+
+
 
 export function fibonacciDP(n){
     let dp =[0, 1];

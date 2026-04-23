@@ -1,17 +1,14 @@
 # Setup Guide
-## .gitignore files
 
-### 1. config/backend.php:
+## .gitignore files (required files to add manually)
+
+### 1. "server/conf/email.php":
 
 ```php
 <?php
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'aco_db');
 define('PROJECT_NAME', 'AlgoSpark');
 define('PROJECT_EMAIL', 'algospark67@gmail.com');
-define('EMAIL_PASS', '');
+define('EMAIL_PASS', ''); // <-- insert email app password here!
 ?>
 ```
 

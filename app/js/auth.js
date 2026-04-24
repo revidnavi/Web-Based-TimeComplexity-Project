@@ -146,7 +146,7 @@ async function login() {
     console.log(response);
 
     if (response.success == false) {
-        showToast("Login failed. Please check your email and password and try again.", 'error');
+        showToast("Login failed ", 'error');
     }
 
     if (response.redirect) {

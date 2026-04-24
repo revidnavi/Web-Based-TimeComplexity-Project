@@ -12,6 +12,13 @@ try {
     $validCode = get_valid_signup_code($conn, $inputs['email']);
 
     if ($validCode == $inputs['code']) {
+        if (get_user_id($conn, $inputs['email']) !== null) {
+            echo json_encode([
+                "success" => false,
+                "message" => "Already registered"
+            ]);
+            exit();
+        }
         $output = insert_user($conn, $inputs['email'], password_hash($inputs['pass0'], PASSWORD_DEFAULT));
         echo json_encode([
             "success" => true,

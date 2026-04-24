@@ -1,5 +1,6 @@
 import { API_URL } from '../conf/api.js';
 import { loginRedirect } from '../lib/util.js';
+import { popupMessage } from '../lib/popup.js';
 
 loginRedirect("auth.html");
 showLogin();
@@ -41,9 +42,11 @@ async function requestEmailCode() {
     const email =  document.getElementById("signupEmail").value.trim();
     
     if (email === "") {
-        console.log("empty email input"); // replace with popup
+        popupMessage("Email cannot be empty.");
         return;
     }
+
+    popupMessage("Generating verification code and sending email...<br><br>Please wait.");
 
     const result = await fetch(API_URL+"/auth/signup_code.php", {
         method: "POST",
@@ -55,10 +58,16 @@ async function requestEmailCode() {
             email
         })
     });
-    const data = await result.json();
-    
-    console.log(data);
-    
+    const response = await result.json();
+    console.log(response);
+
+    if (response.success == true) {
+        popupMessage("Verification code sent to your email.<br><br>Please check your inbox and enter the code to complete signup.");
+    }
+    else {
+        popupMessage("Failed to send verification code.<br><br>Please try again later.");
+    }
+
     document.getElementById("verifyEmailLabel").textContent = `Verification code sent to ${email}`;
     document.getElementById("verifyPanel").style.display = "flex";
     document.getElementById("sendCodeButton").classList.add("hidden");
@@ -71,17 +80,19 @@ async function signup() {
     const pass1 =  document.getElementById("signupPass1").value.trim();
 
     if (email === "") {
-        console.log("empty email input"); // replace with popup
+        popupMessage("Email cannot be empty.");
         return;
     }
     if (pass0 !== pass1) {
-        console.log("mismatch password"); // replace with popup
+        popupMessage("Passwords do not match.");
         return;
     }
     if (pass0.length < MINIMUM_PASSWORD_LENGTH) {
-        console.log("short password"); // replace with popup
+        popupMessage(`Password must be at least ${MINIMUM_PASSWORD_LENGTH} characters long.`);
         return;
     }
+
+    popupMessage("Verifying code and creating account...<br><br>Please wait.");
 
     const result = await fetch(API_URL+"/auth/signup.php", {
         method: "POST",
@@ -93,11 +104,20 @@ async function signup() {
             email, code, pass0
         })
     });
-    const data = await result.json();
+    const response = await result.json();
+    console.log(response); // replace with popup (if successful or not)
+    
+    if (response.success == true) {
+        popupMessage("Account created successfully!<br><br>You can now log in with your new account.");
+    }
+    else if (response.message == "Already registered") { 
+        popupMessage("This email is already registered.<br><br>Please use a different email to sign up.");
+    }
+    else {
+        popupMessage("Failed to create account.<br><br>Please try again.");
+    }
 
-    console.log(data); // replace with popup (if successful or not)
-
-    if (data.success === true) {
+    if (response.success === true) {
         document.getElementById("sendCodeButton").classList.remove("hidden");
         document.getElementById("signupEmail").value = "";
         document.getElementById("emailCode").value = "";
@@ -121,11 +141,14 @@ async function login() {
             email, pass
         })
     });
-    const data = await result.json();
+    const response = await result.json();
+    console.log(response);
 
-    console.log(data); // replace with popup (if successful or not)
+    if (response.success == false) {
+        popupMessage("Login failed.<br><br>Please check your email and password and try again.");
+    }
 
-    if (data.redirect) {
-        window.location.href = data.redirect;
+    if (response.redirect) {
+        window.location.href = response.redirect;
     }
 }

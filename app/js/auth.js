@@ -1,6 +1,7 @@
 import { API_URL } from '../conf/api.js';
 import { loginRedirect } from '../lib/util.js';
-import { popupMessage } from '../lib/popup.js';
+// import { popupMessage } from '../lib/popup.js';
+import { showToast } from '../lib/toast.js';
 
 loginRedirect("auth.html");
 showLogin();
@@ -42,11 +43,11 @@ async function requestEmailCode() {
     const email =  document.getElementById("signupEmail").value.trim();
     
     if (email === "") {
-        popupMessage("Email cannot be empty.");
+        showToast("Email cannot be empty.", "error");
         return;
     }
 
-    popupMessage("Generating verification code and sending email...<br><br>Please wait.");
+    showToast("Generating verification code and sending email...Please wait.", 'success');
 
     const result = await fetch(API_URL+"/auth/signup_code.php", {
         method: "POST",
@@ -62,10 +63,10 @@ async function requestEmailCode() {
     console.log(response);
 
     if (response.success == true) {
-        popupMessage("Verification code sent to your email.<br><br>Please check your inbox and enter the code to complete signup.");
+        showToast("Verification code sent to your email. Please check your inbox and enter the code to complete signup.", 'success');
     }
     else {
-        popupMessage("Failed to send verification code.<br><br>Please try again later.");
+        showToast("Failed to send verification code. Please try again later.", 'error');
     }
 
     document.getElementById("verifyEmailLabel").textContent = `Verification code sent to ${email}`;
@@ -80,19 +81,19 @@ async function signup() {
     const pass1 =  document.getElementById("signupPass1").value.trim();
 
     if (email === "") {
-        popupMessage("Email cannot be empty.");
+        showToast("Email cannot be empty.", 'error');
         return;
     }
     if (pass0 !== pass1) {
-        popupMessage("Passwords do not match.");
+        showToast("Passwords do not match.", 'error');
         return;
     }
     if (pass0.length < MINIMUM_PASSWORD_LENGTH) {
-        popupMessage(`Password must be at least ${MINIMUM_PASSWORD_LENGTH} characters long.`);
+        showToast(`Password must be at least ${MINIMUM_PASSWORD_LENGTH} characters long.`, 'error');
         return;
     }
 
-    popupMessage("Verifying code and creating account...<br><br>Please wait.");
+    showToast("Verifying code and creating account...Please wait.", 'success');
 
     const result = await fetch(API_URL+"/auth/signup.php", {
         method: "POST",
@@ -108,13 +109,13 @@ async function signup() {
     console.log(response); // replace with popup (if successful or not)
     
     if (response.success == true) {
-        popupMessage("Account created successfully!<br><br>You can now log in with your new account.");
+        showToast("Account created successfully! You can now log in with your new account.", 'success');
     }
     else if (response.message == "Already registered") { 
-        popupMessage("This email is already registered.<br><br>Please use a different email to sign up.");
+        showToast("This email is already registered. Please use a different email to sign up.", 'error');
     }
     else {
-        popupMessage("Failed to create account.<br><br>Please try again.");
+        showToast("Failed to create account. Please try again.", 'error');
     }
 
     if (response.success === true) {
@@ -145,7 +146,7 @@ async function login() {
     console.log(response);
 
     if (response.success == false) {
-        popupMessage("Login failed.<br><br>Please check your email and password and try again.");
+        showToast("Login failed. Please check your email and password and try again.", 'error');
     }
 
     if (response.redirect) {

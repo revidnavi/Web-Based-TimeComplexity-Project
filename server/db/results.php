@@ -1,10 +1,6 @@
 <?php
-function insertResult($conn, $user_id, $data) {
-    $algo_id = $data['algoID'];
-    $size = $data['size'];
-    $time = $data['time'];
-    $space = $data['space'];
 
+function insert_result($conn, $user_id, $algo_id, $size, $time, $space) {
     $stmt = $conn->prepare(
         "INSERT INTO results (
             user_id, 
@@ -19,9 +15,9 @@ function insertResult($conn, $user_id, $data) {
         $algo_id, $size, 
         $time, $space
     );
+
+    $success = $stmt->execute();
     
-    $output = $stmt->execute();
     $stmt->close();
-    return $output;
+    return $success;
 }
-?>

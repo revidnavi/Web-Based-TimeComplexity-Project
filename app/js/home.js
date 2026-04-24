@@ -1,18 +1,20 @@
-import { API_URL } from '../config/frontend.js';
+import { API_URL } from '../conf/api.js';
 import { bubbleSort, mergeSort, binarySearch, linearSearch, fibonacciRecursive, fibonacciDP } from '../lib/algorithms.js';
+import { loginRedirect } from '../lib/util.js';
 
 document.getElementById("runButton").addEventListener("click", runAlgorithm);
 document.getElementById("logoutButton").addEventListener("click", logout);
 
 let algos = [];
 
+loginRedirect("home.html");
 loadAlgorithms();
 
 async function loadAlgorithms() {
     const select = document.getElementById("algorithm");
-    const result = await fetch(API_URL+"/get_algos.php");
-    const data = await result.json();
-    algos = data.data;
+    const result = await fetch(API_URL+"/home/get_algos.php");
+    const response = await result.json();
+    algos = response.data;
     if (algos.length === 0) return;
 
     for (let i = 0; i < algos.length; i++) {
@@ -79,7 +81,7 @@ async function runAlgorithm() {
         Execution Time: ${time} ms
     `;
 
-    const result = await fetch(API_URL+"/save_result.php", {
+    const result = await fetch(API_URL+"/home/save_result.php", {
         method: "POST",
         headers: {
             "Content-Type":

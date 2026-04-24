@@ -1,5 +1,7 @@
-import { API_URL } from '../config/frontend.js';
+import { API_URL } from '../conf/api.js';
+import { loginRedirect } from '../lib/util.js';
 
+loginRedirect("auth.html");
 showLogin();
 
 const MINIMUM_PASSWORD_LENGTH = 8;
@@ -41,8 +43,9 @@ async function requestEmailCode() {
     if (email === "") {
         console.log("empty email input"); // replace with popup
         return;
-    }        
-    const result = await fetch(API_URL+"/signup_code.php", {
+    }
+
+    const result = await fetch(API_URL+"/auth/signup_code.php", {
         method: "POST",
         headers: {
             "Content-Type":
@@ -80,7 +83,7 @@ async function signup() {
         return;
     }
 
-    const result = await fetch(API_URL+"/signup.php", {
+    const result = await fetch(API_URL+"/auth/signup.php", {
         method: "POST",
         headers: {
             "Content-Type":
@@ -108,7 +111,7 @@ async function login() {
     const email =  document.getElementById("loginEmail").value.trim();
     const pass =  document.getElementById("loginPass").value.trim();
 
-    const result = await fetch(API_URL+"/login.php", {
+    const result = await fetch(API_URL+"/auth/login.php", {
         method: "POST",
         headers: {
             "Content-Type":

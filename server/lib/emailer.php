@@ -1,13 +1,16 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer-7.0.2/src/PHPMailer.php';
-require 'PHPMailer-7.0.2/src/SMTP.php';
-require 'PHPMailer-7.0.2/src/Exception.php';
-require_once __DIR__ . '/../config.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+require 'PHPMailer/src/Exception.php';
+require_once __DIR__ . '/../conf/email.php';
 
-function sendEmail($to, $subject, $body) {
+
+
+function send_email($to, $subject, $body) {
     $mail = new PHPMailer(true);
     try {
         // Server settings
@@ -33,7 +36,7 @@ function sendEmail($to, $subject, $body) {
         return true;
     } 
     catch (Exception $e) {
+        error_log("Email could not be sent. Mailer Error: {$mail->ErrorInfo}");
         return false;
     }
 }
-?>

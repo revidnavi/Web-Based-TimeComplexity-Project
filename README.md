@@ -1,17 +1,14 @@
 # Setup Guide
-## .gitignore files
 
-### 1. config/backend.php:
+## .gitignore files (required files to add manually)
+
+### 1. "server/conf/email.php":
 
 ```php
 <?php
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'aco_db');
 define('PROJECT_NAME', 'AlgoSpark');
 define('PROJECT_EMAIL', 'algospark67@gmail.com');
-define('EMAIL_PASS', '');
+define('EMAIL_PASS', ''); // <-- insert email app password here!
 ?>
 ```
 
@@ -76,12 +73,31 @@ CREATE TABLE results (
 
 ```sql
 INSERT INTO algorithms 
-(name, category, time_best, time_avg, time_worst, space_complexity)
+(algo_name, category, time_best, time_avg, time_worst, space_complexity)
 VALUES
 ('Bubble Sort', 'Sorting', 'O(n)', 'O(n^2)', 'O(n^2)', 'O(1)'),
 ('Merge Sort', 'Sorting', 'O(n log n)', 'O(n log n)', 'O(n log n)', 'O(n)'),
 ('Binary Search', 'Searching', 'O(1)', 'O(log n)', 'O(log n)', 'O(1)'),
 ('Linear Search', 'Searching', 'O(1)', 'O(n)', 'O(n)', 'O(1)'),
 ('Recursive Fibonacci', 'Computation', 'O(1)', 'O(2^n)', 'O(2^n)', 'O(n)'),
-('Dynamic Fibonacci', 'Computation', 'O(n)', 'O(n)', 'O(n)', 'O(n)');
+('Dynamic Fibonacci', 'Computation', 'O(n)', 'O(n)', 'O(n)', 'O(n)'); 
 ```
+
+## Project Structure
+
+### `app/` — Front-end (public-facing resources)
+- `*.html` — Individual pages of the application  
+- `assets/` — Static resources (images, CSS)  
+- `conf/` — Environment-specific JavaScript configuration variables  
+- `js/` — Page-specific JavaScript entry files  
+- `lib/` — Reusable JavaScript modules  
+  - `util.js` — General-purpose helper functions  
+
+### `server/` — Back-end (application logic and data handling)
+- `api/` — Request handlers for front-end interactions  
+  - Each subfolder corresponds to a specific page
+- `conf/` — Environment-specific PHP configuration variables  
+- `db/` — Data access layer for MySQL tables  
+  - Each file specialized in a specific table
+- `lib/` — Reusable PHP modules  
+  - `util.php` — General-purpose helper functions  

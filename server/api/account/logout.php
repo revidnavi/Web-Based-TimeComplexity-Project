@@ -7,5 +7,6 @@ $_SESSION = array();
 session_destroy();
 
 echo json_encode([
-    "success" => true
+    "success" => true,
+    "redirect" => "auth.html"
 ]);

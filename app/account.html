@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complexity Analyzer</title>
+</head>
+<body>
+    <a href="home.html">HOME</a>
+    <button id="logout">Log out</button>
+    <hr>
+    <label for="email">Email:</label>
+    <input id="email" readonly value="sampleemail@email.com">
+    <br>
+    <label for="date">Created on:</label>
+    <span id="date">2026-67-69</span>
+    <br>
+    <button id="change-pass">Change password</button>
+    <div id="change-pass-form" style="display: none;">
+        <input type="password" id="new-pass-0" placeholder="New password">
+        <br>
+        <input type="password" id="new-pass-1" placeholder="Repeat new password">
+        <br>
+        <input type="password" id="current-pass" placeholder="Current password">
+        <br>
+        <button id="cancel-button">Cancel</button>
+        <button id="submit-pass">Submit</button>
+    </div>
+    <script type="module" src="js/account.js"></script>
+</body>
+</html>

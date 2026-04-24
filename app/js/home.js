@@ -3,7 +3,6 @@ import { bubbleSort, mergeSort, binarySearch, linearSearch, fibonacciRecursive, 
 import { loginRedirect } from '../lib/util.js';
 
 document.getElementById("runButton").addEventListener("click", runAlgorithm);
-document.getElementById("logoutButton").addEventListener("click", logout);
 
 let algos = [];
 
@@ -98,12 +97,4 @@ async function runAlgorithm() {
     }
 
     console.log(data); // replace with popup (if successful or not)
-}
-
-async function logout() {
-    const result = await fetch(API_URL+"/logout.php");
-    const data = await result.json();
-    if (data.success) {
-        window.location.href = "auth.html";
-    }
 }

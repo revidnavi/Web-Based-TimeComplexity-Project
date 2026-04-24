@@ -12,6 +12,7 @@ document.getElementById("gotoSignup").addEventListener("click",showSignup);
 document.getElementById("loginButton").addEventListener("click",login);
 document.getElementById("sendCodeButton").addEventListener("click",requestEmailCode);
 document.getElementById("signupButton").addEventListener("click",signup);
+document.getElementById("changeEmailButton").addEventListener("click", changeEmail)
 
 
 function showSignup() {
@@ -28,9 +29,17 @@ function showLogin() {
     document.getElementById("gotoLogin").classList.add("active");
 }
 
+function changeEmail() {
+    document.getElementById("sendCodeButton").classList.remove("hidden");
+    document.getElementById("verifyPanel").style.display = "none";
+    document.getElementById("signupEmail").value = "";
+    document.getElementById("emailCode").value = "";
+    document.getElementById("signupEmail").focus();
+}
+
 async function requestEmailCode() {
     const email =  document.getElementById("signupEmail").value.trim();
-
+    
     if (email === "") {
         console.log("empty email input"); // replace with popup
         return;
@@ -47,8 +56,12 @@ async function requestEmailCode() {
         })
     });
     const data = await result.json();
-
+    
     console.log(data);
+    
+    document.getElementById("verifyEmailLabel").textContent = `Verification code sent to ${email}`;
+    document.getElementById("verifyPanel").style.display = "flex";
+    document.getElementById("sendCodeButton").classList.add("hidden");
 }
 
 async function signup() {
@@ -85,10 +98,12 @@ async function signup() {
     console.log(data); // replace with popup (if successful or not)
 
     if (data.success === true) {
+        document.getElementById("sendCodeButton").classList.remove("hidden");
         document.getElementById("signupEmail").value = "";
         document.getElementById("emailCode").value = "";
         document.getElementById("signupPass0").value = "";
         document.getElementById("signupPass1").value = "";
+        document.getElementById("verifyPanel").style.display = "none";
     }
 }
 

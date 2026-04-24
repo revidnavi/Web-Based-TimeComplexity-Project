@@ -3,6 +3,7 @@ header("Content-Type: application/json");
 
 require_once __DIR__ . '/../../conf/dbase.php';
 require_once __DIR__ . '/../../db/signup_codes.php';
+require_once __DIR__ . '/../../db/users.php';
 
 try {
     $inputs = json_decode(file_get_contents("php://input"), true);
@@ -10,7 +11,7 @@ try {
 
     $validCode = get_valid_signup_code($conn, $inputs['email']);
 
-    if ($validCode === $inputs['code']) {
+    if ($validCode == $inputs['code']) {
         $output = insert_user($conn, $inputs['email'], password_hash($inputs['pass0'], PASSWORD_DEFAULT));
         echo json_encode([
             "success" => true,

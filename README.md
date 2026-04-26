@@ -72,14 +72,14 @@ CREATE TABLE results (
 
 ```sql
 INSERT INTO algorithms 
-(algo_name, category, time_best, time_avg, time_worst, space_complexity)
+(algo_name, category, time_best, time_avg, time_worst, space_complexity, active)
 VALUES
-('Bubble Sort', 'Sorting', 'O(n)', 'O(n^2)', 'O(n^2)', 'O(1)'),
-('Merge Sort', 'Sorting', 'O(n log n)', 'O(n log n)', 'O(n log n)', 'O(n)'),
-('Binary Search', 'Searching', 'O(1)', 'O(log n)', 'O(log n)', 'O(1)'),
-('Linear Search', 'Searching', 'O(1)', 'O(n)', 'O(n)', 'O(1)'),
-('Recursive Fibonacci', 'Computation', 'O(1)', 'O(2^n)', 'O(2^n)', 'O(n)'),
-('Dynamic Fibonacci', 'Computation', 'O(n)', 'O(n)', 'O(n)', 'O(n)'); 
+('Bubble Sort', 'Sorting', 'O(n)', 'O(n^2)', 'O(n^2)', 'O(1)', 1),
+('Merge Sort', 'Sorting', 'O(n log n)', 'O(n log n)', 'O(n log n)', 'O(n)', 1),
+('Binary Search', 'Searching', 'O(1)', 'O(log n)', 'O(log n)', 'O(1)', 1),
+('Linear Search', 'Searching', 'O(1)', 'O(n)', 'O(n)', 'O(1)', 1),
+('Recursive Fibonacci', 'Computation', 'O(1)', 'O(2^n)', 'O(2^n)', 'O(n)', 1),
+('Dynamic Fibonacci', 'Computation', 'O(n)', 'O(n)', 'O(n)', 'O(n)', 1); 
 ```
 
 ## Project Structure

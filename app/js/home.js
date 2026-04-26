@@ -74,13 +74,19 @@ async function runAlgorithm() {
     let end = performance.now();
     let time = end - start;
 
-    document.getElementById("result").innerText = `
+    let resultd = `
         Space Complexity: ${algos[algoIndex].space_complexity}
         Time Complexity: ${algos[algoIndex].time_avg}
 
         Space Used: ${space * 8} bytes
         Execution Time: ${time} ms
     `;
+
+    document.getElementById("resultsCard").style.display = "flex";
+
+    document.getElementById("resultSize").innerText = size;
+    document.getElementById("resultTime").innerText = time;
+    document.getElementById("resultTimestamp").innerText = new Date().toLocaleString();
 
     const result = await fetch(API_URL+"/home/save_result.php", {
         method: "POST",

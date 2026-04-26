@@ -1,6 +1,6 @@
 import { API_URL } from '../conf/api.js';
 import { loginRedirect } from '../lib/util.js';
-import { popupMessage } from '../lib/popup.js';
+import { popupMessage } from '../lib/popups.js';
 
 loginRedirect("auth.html");
 showLogin();

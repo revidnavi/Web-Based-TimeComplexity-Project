@@ -132,6 +132,15 @@ async function login() {
     const email =  document.getElementById("loginEmail").value.trim();
     const pass =  document.getElementById("loginPass").value.trim();
 
+    if (email.length < 10) {
+        popupMessage(`Invalid email length`);
+        return;
+    }
+    if (pass.length < MINIMUM_PASSWORD_LENGTH) {
+        popupMessage(`Invalid password length`);
+        return;
+    }
+   
     const result = await fetch(API_URL+"/auth/login.php", {
         method: "POST",
         headers: {

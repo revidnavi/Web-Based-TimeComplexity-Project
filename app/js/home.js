@@ -2,17 +2,18 @@ import { API_URL } from '../conf/api.js';
 import { bubbleSort, mergeSort, binarySearch, linearSearch, fibonacciRecursive, fibonacciDP } from '../lib/algorithms.js';
 import { loginRedirect } from '../lib/util.js';
 
-document.getElementById("runButton").addEventListener("click", runAlgorithm);
-document.getElementById("logoutButton").addEventListener("click", logout);
-
 let algos = [];
 
 loginRedirect("home.html");
 loadAlgorithms();
+showAdminButton();
+
+document.getElementById("runButton").addEventListener("click", runAlgorithm);
+document.getElementById("algorithm").addEventListener("change", updateComplexity);
 
 async function loadAlgorithms() {
     const select = document.getElementById("algorithm");
-    const result = await fetch(API_URL+"/home/get_algos.php");
+    const result = await fetch(API_URL+"/home/get_active_algos.php");
     const response = await result.json();
     algos = response.data;
     if (algos.length === 0) return;
@@ -26,8 +27,18 @@ async function loadAlgorithms() {
     document.getElementById("algoOptionPlaceholder").remove();
 }
 
+function updateComplexity() {
+    let algoIndex = document.getElementById("algorithm").value;
+    document.getElementById('complexityCard').style.display = "flex";
+    document.getElementById('best-time').innerText = "Best: " + algos[algoIndex].time_best;
+    document.getElementById('avg-time').innerText = "Average: " + algos[algoIndex].time_avg;
+    document.getElementById('worst-time').innerText = "Worst: " + algos[algoIndex].time_worst;
+    document.getElementById('space-complexity').innerText = algos[algoIndex].space_complexity;
+}
+
 async function runAlgorithm() {
     let algoIndex = document.getElementById("algorithm").value;
+    
     let algoID = algos[algoIndex].id;
     let size = document.getElementById("size").value;
     let space = 0;
@@ -73,13 +84,19 @@ async function runAlgorithm() {
     let end = performance.now();
     let time = end - start;
 
-    document.getElementById("result").innerText = `
+    let resultd = `
         Space Complexity: ${algos[algoIndex].space_complexity}
         Time Complexity: ${algos[algoIndex].time_avg}
 
         Space Used: ${space * 8} bytes
         Execution Time: ${time} ms
     `;
+
+    document.getElementById("resultsCard").style.display = "flex";
+
+    document.getElementById("resultSize").innerText = size;
+    document.getElementById("resultTime").innerText = time;
+    document.getElementById("resultTimestamp").innerText = new Date().toLocaleString();
 
     const result = await fetch(API_URL+"/home/save_result.php", {
         method: "POST",
@@ -100,10 +117,14 @@ async function runAlgorithm() {
     console.log(data); // replace with popup (if successful or not)
 }
 
-async function logout() {
-    const result = await fetch(API_URL+"/logout.php");
-    const data = await result.json();
-    if (data.success) {
-        window.location.href = "auth.html";
+async function showAdminButton() {
+    const result = await fetch(API_URL+"/home/get_user_type.php");
+    const response = await result.json();
+    console.log(response);
+    
+    let data = response.data;
+
+    if (data['user type'] == "admin") {
+        document.getElementById("admin-nav").style.display = "inline";
     }
 }

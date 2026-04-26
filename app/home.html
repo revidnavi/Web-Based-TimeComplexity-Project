@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complexity Analyzer</title>
-    <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/reset.css">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/popups.css">
+    <title>Complexity Analyzer</title>
 </head>
-<body>
+
+<body class="home-page">
     <!-- Home  Heading -->
     <div class="homeHeading-card">
         <div class="logo-container logo-container-home">
             <div class="logo logo-home">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="currentColor" opacity="0.8"/>
-                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="currentColor" opacity="0.8" />
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
             </div>
             <div class="logo-text logo-text-home">
                 <span class="logo-title">AlgoSpark</span>
@@ -24,18 +29,94 @@
             </div>
         </div>
         <div class="tabButton-home-card">
-            <button>Profile</button>
-            <button id="logoutButton">Log Out</button>
+            <a href="admin.html" id="admin-nav" style="display: none;">Admin</a>
+            <a href="account.html">Profile</a>
         </div>
     </div>
 
-    <select id="algorithm">
-        <option id="algoOptionPlaceholder">No Algorithm Available</option>
-    </select>
+    <div class="homeSwitch-card">
+        <div class="tab-group homeSwitch">
+            <button class="tab active" id="">Analyzer</button>
+            <button class="tab" id="">Charts</button>
+            <button class="tab">History</button>
+        </div>
+    </div>
 
-    <input type="number" id="size" placeholder="Input Size">
-    <button id="runButton">Run</button>
-    <p id="result"></p>
+
+    <div id="algorithmCard" class="analyzer algorithmSelect">
+        <div class="analyzerCard-head">
+            <p class="main-text">Algorithm Configuration</p>
+            <p class="sub-text">Select an algorithm and configure input parameters</p>
+        </div>
+        <p>Algorithm</p>
+        <select id="algorithm">
+            <option id="algoOptionPlaceholder">No Algorithm Available</option>
+        </select>
+
+        <p>Input Size</p>
+        <input type="number" id="size" placeholder="Input Size">
+        <button id="runButton">Run</button>
+    </div>
+
+    <div id="complexityCard" class="analyzer complexity is-hidden" style="display: none;">
+        <div class="analyzerCard-head">
+            <p class="main-text">Theoretical Complexity</p>
+            <p class="sub-text" id="complexityHeading">Expected time and space complexity for the selected algorithm.
+            </p>
+        </div>
+        <p>Decription</p>
+        <p class="sub-text">Description unavailable.</p>
+        <p>Time Complexity</p>
+        <div class="time-complexity-desc">
+            <p class="case best" id="best-time">Best: </p>
+            <p class="case average" id="avg-time">Average: </p>
+            <p class="case worst" id="worst-time">Worst: </p>
+        </div>
+        <p>Space Complexity</p>
+        <div class="space-complexity-desc">
+            <p class="case constant" id="space-complexity">O</p>
+        </div>
+
+    </div>
+
+    <div id="resultsCard" class="analyzer result is-hidden" style="display: none;">
+        <div class="analyzerCard-head resultCard-head">
+            <p class="main-text">Latest Execution Result</p>
+            <p class="sub-text">Most recent algorithm execution analysis</p>
+        </div>
+
+        <div class="result-details">
+            <p class="result-label">Input Size:</p>
+            <p class="result-value" id="resultSize">-</p>
+
+            <p class="result-label">Execution Time:</p>
+            <p class="result-value" id="resultTime">-</p>
+
+            <p class="result-label">Timestamp:</p>
+            <p class="result-value" id="resultTimestamp">-</p>
+        </div>
+
+        <div class="result-note">
+            <p class="result-note-title">Note:</p>
+            <p class="sub-text">Empirical runtime may differ from theoretical complexity due to: JavaScript engine
+                optimizations, hardware variations, input data distribution, garbage collection, and other runtime
+                factors.</p>
+        </div>
+    </div>
+
+    <!-- Heading Card: 
+                Buttons: needs improvement
+            Algorithm Card: Cannot scroll page
+                Home switch buttons not yet working
+                Input size not yet range sliding
+
+            Complexity/Description card and result card:
+                not yet hidden as default   
+                Many components are WIP.
+        -->
+
+
     <script type="module" src="js/home.js"></script>
 </body>
+
 </html>

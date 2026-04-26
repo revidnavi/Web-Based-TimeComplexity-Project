@@ -10,14 +10,15 @@ login_block();
 
 try {
     $conn = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
-    $algorithms = get_algorithms($conn);
+    $userType = $_SESSION["userType"];
+
     echo json_encode([
         "success" => true,
-        "data" => $algorithms
+        "data" => ["user type" => $userType]
     ]);
 }
 catch (Exception $e) {
-    error_log("Error in get_algos.php : " . $e->getMessage());
+    error_log("Error in get_user_type.php : " . $e->getMessage());
     echo json_encode([
         "success" => false,
         "data" => []

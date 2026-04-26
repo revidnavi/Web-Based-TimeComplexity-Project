@@ -1,0 +1,60 @@
+template {
+    display: contents;
+}
+
+.popup-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 280px;
+    max-width: 90vw;
+    max-height: 90vh;
+    padding: 24px 32px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #333;
+    z-index: 9999;
+    overflow: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: center;
+}
+
+.popup-title {
+    margin: 0 0 16px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #222;
+}
+
+.popup-content {
+    margin: 0;
+    display: block;
+}
+
+.popup-confirm {
+    display: inline-block;
+    padding: 10px 32px;
+    margin-top: 20px;
+    background: #0078d4;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.popup-confirm:hover {
+    background: #106ebe;
+}
+
+.popup-confirm:active {
+    background: #005a9e;
+}

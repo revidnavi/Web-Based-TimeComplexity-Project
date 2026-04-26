@@ -8,10 +8,11 @@ require_once __DIR__ . '/../../db/users.php';
 try {
     $inputs = json_decode(file_get_contents("php://input"), true);
     $conn = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
-    $hashedPass = get_hashed_pass($conn, $inputs['email']);
+    $hashedPass = get_hashed_pass_by_email($conn, $inputs['email']);
     
     if ($hashedPass != null && password_verify($inputs['pass'], $hashedPass)) {
         $_SESSION["userID"] = get_user_id($conn, $inputs['email']);
+        $_SESSION["userType"] = get_user_type($conn, $_SESSION["userID"]);
         echo json_encode([
             "success" => true,
             "message" => "Login successful",

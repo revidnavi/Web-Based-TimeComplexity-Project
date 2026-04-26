@@ -12,7 +12,7 @@ showAdminButton();
 
 async function loadAlgorithms() {
     const select = document.getElementById("algorithm");
-    const result = await fetch(API_URL+"/get_algos.php");
+    const result = await fetch(API_URL+"/home/get_active_algos.php");
     const response = await result.json();
     algos = response.data;
     if (algos.length === 0) return;

@@ -8,10 +8,11 @@ let algos = [];
 
 loginRedirect("home.html");
 loadAlgorithms();
+showAdminButton();
 
 async function loadAlgorithms() {
     const select = document.getElementById("algorithm");
-    const result = await fetch(API_URL+"/home/get_algos.php");
+    const result = await fetch(API_URL+"/get_algos.php");
     const response = await result.json();
     algos = response.data;
     if (algos.length === 0) return;
@@ -27,6 +28,7 @@ async function loadAlgorithms() {
 
 async function runAlgorithm() {
     let algoIndex = document.getElementById("algorithm").value;
+    
     let algoID = algos[algoIndex].id;
     let size = document.getElementById("size").value;
     let space = 0;
@@ -97,4 +99,16 @@ async function runAlgorithm() {
     }
 
     console.log(data); // replace with popup (if successful or not)
+}
+
+async function showAdminButton() {
+    const result = await fetch(API_URL+"/home/get_user_type.php");
+    const response = await result.json();
+    console.log(response);
+    
+    let data = response.data;
+
+    if (data['user type'] == "admin") {
+        document.getElementById("admin-nav").style.display = "inline";
+    }
 }

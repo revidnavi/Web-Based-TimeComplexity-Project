@@ -2,9 +2,9 @@
 header("Content-Type: application/json");
 session_start();
 
-require_once __DIR__ . '/../../conf/dbase.php';
-require_once __DIR__ . '/../../db/algorithms.php';
-require_once __DIR__ . '/../../lib/util.php';
+require_once __DIR__ . '/../conf/dbase.php';
+require_once __DIR__ . '/../db/algorithms.php';
+require_once __DIR__ . '/../lib/util.php';
 
 login_block();
 

@@ -40,20 +40,20 @@ export async function popupConfirm(content = "...") {
         const tpl = document.getElementById("popup-confirm")
         const node = tpl.content.cloneNode(true)
 
-        const container = node.querySelector(".popup-container")
-        const text = node.querySelector(".popup-content-container")
-        const ok = node.querySelector(".popup-confirm")       
-        const cancel = node.querySelector(".popup-cancel")  
+        const containerPopup = node.querySelector(".popup-container")
+        const textPopup = node.querySelector(".popup-content-container")
+        const okButton = node.querySelector(".popup-confirm")       
+        const cancelButton = node.querySelector(".popup-cancel")  
 
-        text.innerHTML = content
+        textPopup.innerHTML = content
 
-        ok.onclick = () => {
-            container.remove()
+        okButton.onclick = () => {
+            containerPopup.remove()
             resolve(true)
         }
 
-        cancel.onclick = () => {
-            container.remove()
+        cancelButton.onclick = () => {
+            containerPopup.remove()
             resolve(false)
         }
 

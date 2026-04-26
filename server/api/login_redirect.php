@@ -13,13 +13,22 @@ catch (Exception $e) {
 }
 
 $loggedInUserID = $_SESSION['userID'] ?? null;
+$loggedInUserType = $_SESSION['userType'] ?? null;
 
-if ($currentPage != "auth.html" && $loggedInUserID === null) {
+if ($currentPage != "auth.html" && ($loggedInUserID === null || $loggedInUserType === null)) {   // if on user page  - but not logged in
     echo json_encode(["redirect" => "auth.html"]);
 }
-elseif ($currentPage == "auth.html" && $loggedInUserID !== null) {
+elseif ($currentPage == "admin.html" && $loggedInUserType != "admin") {                          // if on admin page - but not admin
     echo json_encode(["redirect" => "home.html"]);
 }
+elseif ($currentPage == "auth.html" && $loggedInUserID !== null && $loggedInUserType !== null) { // if on login page - but logged in
+    if ($loggedInUserType == "admin") {
+        echo json_encode(["redirect" => "admin.html"]);
+    }
+    else {
+        echo json_encode(["redirect" => "home.html"]);
+    }
+}
 else {
-    echo json_encode(["redirect" => false]);
+    echo json_encode(["redirect" => null]);
 }

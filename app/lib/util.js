@@ -13,7 +13,7 @@ export async function loginRedirect(currentPage) {
     });
     const response = await result.json();
     
-    if (response.redirect) {
+    if (response.redirect != null) {
         window.location.href = response.redirect;
     }
 }

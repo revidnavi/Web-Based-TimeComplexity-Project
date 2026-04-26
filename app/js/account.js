@@ -10,6 +10,7 @@ document.getElementById("logout").addEventListener("click", logout);
 loginRedirect("account.html");
 closeChangePasswordForm();
 loadAccountInfo();
+showAdminButton();
 
 const MINIMUM_PASSWORD_LENGTH = 8;
 
@@ -93,5 +94,19 @@ async function logout() {
     const response = await result.json();
     if (response.success) {
         window.location.href = "auth.html";
+    }
+}
+
+
+
+async function showAdminButton() {
+    const result = await fetch(API_URL+"/home/get_user_type.php");
+    const response = await result.json();
+    console.log(response);
+    
+    let data = response.data;
+
+    if (data['user type'] == "admin") {
+        document.getElementById("admin-nav").style.display = "inline";
     }
 }

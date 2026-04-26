@@ -12,7 +12,7 @@ function insert_user($conn, $email, $hashedPass) {
 
 
 
-function get_hashed_pass($conn, $email) {
+function get_hashed_pass_by_email($conn, $email) {
     $stmt = $conn->prepare("SELECT hashed_pass FROM users WHERE email = ? LIMIT 1");
     $stmt->bind_param("s", $email); 
 
@@ -59,6 +59,23 @@ function get_user_id($conn, $email) {
 
     $stmt->close();
     return $id;
+}
+
+
+
+function get_user_type($conn, $id) {
+    $stmt = $conn->prepare("SELECT user_type FROM users WHERE id = ? LIMIT 1");
+    $stmt->bind_param("i", $id); 
+
+    $stmt->execute();
+    $stmt->store_result();
+
+    $type = null;
+    $stmt->bind_result($type);
+    $stmt->fetch();
+
+    $stmt->close();
+    return $type;
 }
 
 

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/popups.css">
+    <title>Complexity Analyzer</title>
+</head>
+<body>
+    <a href="home.html">Home</a>
+    <a href="account.html">Account</a>
+    <button id="dashboard-btn">Dashboard</button> 
+    <button id="algorithms-btn">Algorithms</button>
+
+    <hr>
+    
+    <div id="dashboard" style="display: none;">
+        <p>insert graph, data summaries, idk</p>
+    </div>
+
+    <div id="algos" style="display: none;"> 
+        <div id="algos-container">
+            
+        </div>
+        <hr>
+        <button id="new-algo-button">Add new algorithm</button>
+        <div id="algo-form" style="display: none;">
+            <h3 id="algo-form-title">Add new algorithm</h3>
+            <input type="hidden" id="algo-id">
+            <input type="text" id="algo-name" placeholder="Algorithm name">
+            <input type="text" id="category" placeholder="Category">
+            <input type="text" id="time-best" placeholder="Time best">
+            <input type="text" id="time-avg" placeholder="Time avg">
+            <input type="text" id="time-worst" placeholder="Time worst">
+            <input type="text" id="space-complexity" placeholder="Space complexity">
+            <label for="algo-active">Active:</label>
+                <input type="checkbox" id="algo-active">
+            <button id="submit-algo">Submit</button>
+        </div>
+    </div>
+    
+    <template id="algo-card-template"> <!-- Template for the algorithm card that goes in algos-container-->
+        <div class="algo-card">
+            <span class="algo-name"></span>
+            <span class="category"></span>
+            <span class="time-best"></span>
+            <span class="time-avg"></span>
+            <span class="time-worst"></span>
+            <span class="space-complexity"></span>
+            <span class="active"></span>
+            <button class="edit-algo">Edit</button>
+            <button class="delete-algo">Delete</button>
+        </div>
+    </template>
+    
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>

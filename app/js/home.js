@@ -80,6 +80,8 @@ async function runAlgorithm() {
         Execution Time: ${time} ms
     `;
 
+    document.getElementById("resultsCard").style.display = "flex";
+
     document.getElementById("resultSize").innerText = size;
     document.getElementById("resultTime").innerText = time;
     document.getElementById("resultTimestamp").innerText = new Date().toLocaleString();

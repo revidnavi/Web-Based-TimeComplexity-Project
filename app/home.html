@@ -58,7 +58,7 @@
         <button id="runButton">Run</button>
     </div>
 
-    <div id="complexityCard" class="analyzer complexity is-hidden">
+    <div id="complexityCard" class="analyzer complexity is-hidden" style="display: none;">
         <div class="analyzerCard-head">
             <p class="main-text">Theoretical Complexity</p>
             <p class="sub-text" id="complexityHeading">Expected time and space complexity for the selected algorithm.
@@ -68,13 +68,13 @@
         <p class="sub-text">Description unavailable.</p>
         <p>Time Complexity</p>
         <div class="time-complexity-desc">
-            <p class="case best">Best: </p>
-            <p class="case average">Average: </p>
-            <p class="case worst">Worst: </p>
+            <p class="case best" id="best-time">Best: </p>
+            <p class="case average" id="avg-time">Average: </p>
+            <p class="case worst" id="worst-time">Worst: </p>
         </div>
         <p>Space Complexity</p>
         <div class="space-complexity-desc">
-            <p class="case constant">O</p>
+            <p class="case constant" id="space-complexity">O</p>
         </div>
 
     </div>

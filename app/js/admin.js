@@ -80,7 +80,7 @@ async function updateAlgo() {
 }
 
 async function loadAlgos() {
-    const result = await fetch(API_URL+"/get_algos.php");
+    const result = await fetch(API_URL+"/admin/get_algos.php");
     const response = await result.json();
     console.log(response);
 

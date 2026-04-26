@@ -2,13 +2,14 @@ import { API_URL } from '../conf/api.js';
 import { bubbleSort, mergeSort, binarySearch, linearSearch, fibonacciRecursive, fibonacciDP } from '../lib/algorithms.js';
 import { loginRedirect } from '../lib/util.js';
 
-document.getElementById("runButton").addEventListener("click", runAlgorithm);
-
 let algos = [];
 
 loginRedirect("home.html");
 loadAlgorithms();
 showAdminButton();
+
+document.getElementById("runButton").addEventListener("click", runAlgorithm);
+document.getElementById("algorithm").addEventListener("change", updateComplexity);
 
 async function loadAlgorithms() {
     const select = document.getElementById("algorithm");
@@ -24,6 +25,15 @@ async function loadAlgorithms() {
         select.appendChild(option);
     }
     document.getElementById("algoOptionPlaceholder").remove();
+}
+
+function updateComplexity() {
+    let algoIndex = document.getElementById("algorithm").value;
+    document.getElementById('complexityCard').style.display = "flex";
+    document.getElementById('best-time').innerText = "Best: " + algos[algoIndex].time_best;
+    document.getElementById('avg-time').innerText = "Average: " + algos[algoIndex].time_avg;
+    document.getElementById('worst-time').innerText = "Worst: " + algos[algoIndex].time_worst;
+    document.getElementById('space-complexity').innerText = algos[algoIndex].space_complexity;
 }
 
 async function runAlgorithm() {

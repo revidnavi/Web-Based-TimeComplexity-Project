@@ -1,6 +1,7 @@
 import { API_URL } from '../conf/api.js';
 import { loginRedirect } from '../lib/util.js';
-import { popupMessage } from '../lib/popups.js';
+// import { popupMessage } from '../lib/popup.js';
+import { showToast } from '../lib/toast.js';
 
 loginRedirect("auth.html");
 showLogin();
@@ -40,13 +41,12 @@ function changeEmail() {
 
 async function requestEmailCode() {
     const email =  document.getElementById("signupEmail").value.trim();
-    
     if (email === "") {
-        popupMessage("Email cannot be empty.");
+        showToast('Warning', "Please fill out empty fields.", "warning");
         return;
     }
 
-    popupMessage("Generating verification code and sending email...<br><br>Please wait.");
+    // showToast("We’ve sent a verification link to your email. Please check your inbox.", 'success');
 
     const result = await fetch(API_URL+"/auth/signup_code.php", {
         method: "POST",
@@ -62,10 +62,15 @@ async function requestEmailCode() {
     console.log(response);
 
     if (response.success == true) {
-        popupMessage("Verification code sent to your email.<br><br>Please check your inbox and enter the code to complete signup.");
+        showToast('Success',"We’ve sent a verification link to your email. Please check your inbox.", 'success');
+    } 
+    else if (response.success == false) {
+        showToast('Warning', "Email is already taken.", 'warning');
+        return;
     }
     else {
-        popupMessage("Failed to send verification code.<br><br>Please try again later.");
+        showToast('Error', "Failed to send verification code. Please try again later.", 'error');
+        return;
     }
 
     document.getElementById("verifyEmailLabel").textContent = `Verification code sent to ${email}`;
@@ -80,19 +85,19 @@ async function signup() {
     const pass1 =  document.getElementById("signupPass1").value.trim();
 
     if (email === "") {
-        popupMessage("Email cannot be empty.");
+        showToast('Warning', "Email cannot be empty.", 'warning');
         return;
     }
     if (pass0 !== pass1) {
-        popupMessage("Passwords do not match.");
+        showToast('Warning', "Passwords do not match.", 'warning');
         return;
     }
     if (pass0.length < MINIMUM_PASSWORD_LENGTH) {
-        popupMessage(`Password must be at least ${MINIMUM_PASSWORD_LENGTH} characters long.`);
+        showToast('Warning', "Password must be at least ${MINIMUM_PASSWORD_LENGTH} characters long.", 'warning');
         return;
     }
 
-    popupMessage("Verifying code and creating account...<br><br>Please wait.");
+    // showToast('Success', "Verifying code and creating account...Please wait.", 'success');
 
     const result = await fetch(API_URL+"/auth/signup.php", {
         method: "POST",
@@ -108,13 +113,15 @@ async function signup() {
     console.log(response); // replace with popup (if successful or not)
     
     if (response.success == true) {
-        popupMessage("Account created successfully!<br><br>You can now log in with your new account.");
+        showToast('Success', "Account created successfully! You can now log in with your new account.", 'success');
     }
     else if (response.message == "Already registered") { 
-        popupMessage("This email is already registered.<br><br>Please use a different email to sign up.");
+        showToast('Warning', "This email is already registered. Please use a different email to sign up.", 'warning');
+        return;
     }
     else {
-        popupMessage("Failed to create account.<br><br>Please try again.");
+        showToast('Error', "Failed to create account. Please try again.", 'error');
+        return;
     }
 
     if (response.success === true) {
@@ -131,12 +138,16 @@ async function login() {
     const email =  document.getElementById("loginEmail").value.trim();
     const pass =  document.getElementById("loginPass").value.trim();
 
-    if (email.length < 10) {
-        popupMessage(`Invalid email length`);
+    if (email === "" && pass === "") {
+        showToast('Warning', "Please fill out empty fields.", 'warning');
         return;
     }
-    if (pass.length < MINIMUM_PASSWORD_LENGTH) {
-        popupMessage(`Invalid password length`);
+    else if (email.length < 10) {
+        showToast('Warning', "Invalid email length", 'warning');
+        return;
+    }
+    else if (pass.length < MINIMUM_PASSWORD_LENGTH) {
+        showToast('Warning', "Invalid password length", 'warning');
         return;
     }
    
@@ -154,7 +165,8 @@ async function login() {
     console.log(response);
 
     if (response.success == false) {
-        popupMessage("Login failed.<br><br>Please check your email and password and try again.");
+        showToast('Error', "Login failed ", 'error');
+        return;
     }
 
     if (response.redirect) {

@@ -15,6 +15,118 @@ body {
     display: none;
 }
 
+.pageButton {
+    font-weight: bold;
+    padding: 10px;
+    color: white;
+    background-color: #2563eb;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.pageButton:hover {
+    background-color: #022164;
+    transition: ease-in 0.2s ;
+    transition-duration: 200ms;
+}
+
+.pageButton:active {
+    transform: scale(0.95);
+}
+
+/* Toast */
+
+#toast-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.toast {
+    background: white;
+    position: relative;
+    border-radius: 0.5rem;
+    font-weight: 400;
+    margin: 15px 0;
+    padding: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 0 1rem;
+    min-width: 300px;
+    animation: slideIn 0.3s ease;
+}
+
+.toast-header {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.toast-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: green;
+    animation: loading 5s linear forwards;
+}
+
+.toast-error::after {
+    background-color: red;
+}
+
+.toast-warning::after {
+    background-color: orange;
+}
+
+@keyframes loading {
+    100% {
+        width: 0;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+.toast .material-icons {
+    font-size: 3rem;
+}
+
+.icon-success {
+    color: green;
+}
+
+.icon-error {
+    color: red;
+}
+
+.icon-warning {
+    color: orange;
+}
+
 /* Logo and Group Name*/
 
 
@@ -84,16 +196,6 @@ body {
     background-color: #f1f5f9;
 }
 
-#loginButton {
-    font-weight: bold;
-    padding: 10px;
-    color: white;
-    background-color: #2563eb;
-    border-radius: 10px;
-    border: none;
-    margin-top: 20px;
-}
-
 /* Title Header */
 
 .title-header {
@@ -132,16 +234,6 @@ body {
     background-color: #f1f5f9;
 }
 
-#sendCodeButton {
-    font-weight: bold;
-    padding: 10px;
-    color: white;
-    background-color: #2563eb;
-    border-radius: 10px;
-    border: none;
-}
-
-
 /* Tab Switcher */
 
 .tab-group {
@@ -161,9 +253,9 @@ body {
     background: transparent;
     border-radius: 999px;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: bold;
     color: #6b7280;
-    cursor: pointer; 
+    cursor: pointer;
 }
 
 .tab.active {
@@ -208,32 +300,6 @@ body {
     background-color: #fff;
     font-size: 16px;
     letter-spacing: 4px;
-}
-
-#signupButton {
-    font-weight: bold;
-    padding: 10px;
-    color: white;
-    background-color: #2563eb;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-}
-
-#changeEmailButton {
-    font-weight: bold;
-    padding: 10px;
-    color: #111827;
-    background-color: #fff;
-    border-radius: 10px;
-    border: 1.5px solid #e2e8f0;
-    cursor: pointer;
-}
-
-
-body.home-page {
-    background: #e6f4ff;
-    padding-top: 81px; /* remove once home page scrollable is fixed */
 }
 
 /* Home: Head tab card */

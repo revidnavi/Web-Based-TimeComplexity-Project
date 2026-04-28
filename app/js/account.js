@@ -2,6 +2,8 @@ import { API_URL } from '../conf/api.js';
 import { loginRedirect } from '../lib/util.js';
 import { popupMessage } from '../lib/popups.js';
 
+document.getElementById("home-button").addEventListener("click", gotoHome)
+
 document.getElementById("change-pass").addEventListener("click", openChangePasswordForm);
 document.getElementById("cancel-button").addEventListener("click", closeChangePasswordForm);
 document.getElementById("submit-pass").addEventListener("click", changePassword);
@@ -14,7 +16,9 @@ showAdminButton();
 
 const MINIMUM_PASSWORD_LENGTH = 8;
 
-
+function gotoHome() {
+    window.location.href = "home.html";
+}
 
 function openChangePasswordForm() {
     document.getElementById("change-pass-form").style.display = "block";

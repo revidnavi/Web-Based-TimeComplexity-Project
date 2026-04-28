@@ -8,8 +8,14 @@ loginRedirect("home.html");
 loadAlgorithms();
 showAdminButton();
 
+document.getElementById("profile-button").addEventListener("click", openProfile);
+
 document.getElementById("runButton").addEventListener("click", runAlgorithm);
 document.getElementById("algorithm").addEventListener("change", updateComplexity);
+
+function openProfile() {
+    window.location.href = 'account.html';
+}
 
 async function loadAlgorithms() {
     const select = document.getElementById("algorithm");

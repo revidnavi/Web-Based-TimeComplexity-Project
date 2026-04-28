@@ -1,4 +1,4 @@
-export function showToast(message, type) {
+export function showToast(header, message, type) {
     const container = document.getElementById('toast-container');
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
@@ -9,8 +9,12 @@ export function showToast(message, type) {
     else if (type === 'warning') icon = 'warning';
 
    toast.innerHTML = `
+
     <span class="material-icons icon-${type}">${icon}</span>
+    <div class="toast-content">
+    <span class="toast-header">${header}</span>
         <span class="toast-message">${message}</span>
+    </div>
 `;
 
     container.appendChild(toast);

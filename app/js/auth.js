@@ -41,13 +41,12 @@ function changeEmail() {
 
 async function requestEmailCode() {
     const email =  document.getElementById("signupEmail").value.trim();
-    
     if (email === "") {
-        showToast("Email cannot be empty.", "error");
+        showToast('Warning', "Please fill out empty fields.", "warning");
         return;
     }
 
-    showToast("Generating verification code and sending email...Please wait.", 'success');
+    // showToast("We’ve sent a verification link to your email. Please check your inbox.", 'success');
 
     const result = await fetch(API_URL+"/auth/signup_code.php", {
         method: "POST",
@@ -63,10 +62,15 @@ async function requestEmailCode() {
     console.log(response);
 
     if (response.success == true) {
-        showToast("Verification code sent to your email. Please check your inbox and enter the code to complete signup.", 'success');
+        showToast('Success',"We’ve sent a verification link to your email. Please check your inbox.", 'success');
+    } 
+    else if (response.success == false) {
+        showToast('Warning', "Email is already taken.", 'warning');
+        return;
     }
     else {
-        showToast("Failed to send verification code. Please try again later.", 'error');
+        showToast('Error', "Failed to send verification code. Please try again later.", 'error');
+        return;
     }
 
     document.getElementById("verifyEmailLabel").textContent = `Verification code sent to ${email}`;
@@ -81,19 +85,19 @@ async function signup() {
     const pass1 =  document.getElementById("signupPass1").value.trim();
 
     if (email === "") {
-        showToast("Email cannot be empty.", 'error');
+        showToast('Warning', "Email cannot be empty.", 'warning');
         return;
     }
     if (pass0 !== pass1) {
-        showToast("Passwords do not match.", 'error');
+        showToast('Warning', "Passwords do not match.", 'warning');
         return;
     }
     if (pass0.length < MINIMUM_PASSWORD_LENGTH) {
-        showToast(`Password must be at least ${MINIMUM_PASSWORD_LENGTH} characters long.`, 'error');
+        showToast('Warning', "Password must be at least ${MINIMUM_PASSWORD_LENGTH} characters long.", 'warning');
         return;
     }
 
-    showToast("Verifying code and creating account...Please wait.", 'success');
+    // showToast('Success', "Verifying code and creating account...Please wait.", 'success');
 
     const result = await fetch(API_URL+"/auth/signup.php", {
         method: "POST",
@@ -109,13 +113,15 @@ async function signup() {
     console.log(response); // replace with popup (if successful or not)
     
     if (response.success == true) {
-        showToast("Account created successfully! You can now log in with your new account.", 'success');
+        showToast('Success', "Account created successfully! You can now log in with your new account.", 'success');
     }
     else if (response.message == "Already registered") { 
-        showToast("This email is already registered. Please use a different email to sign up.", 'error');
+        showToast('Warning', "This email is already registered. Please use a different email to sign up.", 'warning');
+        return;
     }
     else {
-        showToast("Failed to create account. Please try again.", 'error');
+        showToast('Error', "Failed to create account. Please try again.", 'error');
+        return;
     }
 
     if (response.success === true) {
@@ -132,12 +138,16 @@ async function login() {
     const email =  document.getElementById("loginEmail").value.trim();
     const pass =  document.getElementById("loginPass").value.trim();
 
-    if (email.length < 10) {
-        popupMessage(`Invalid email length`);
+    if (email === "" && pass === "") {
+        showToast('Warning', "Please fill out empty fields.", 'warning');
         return;
     }
-    if (pass.length < MINIMUM_PASSWORD_LENGTH) {
-        popupMessage(`Invalid password length`);
+    else if (email.length < 10) {
+        showToast('Warning', "Invalid email length", 'warning');
+        return;
+    }
+    else if (pass.length < MINIMUM_PASSWORD_LENGTH) {
+        showToast('Warning', "Invalid password length", 'warning');
         return;
     }
    
@@ -155,7 +165,8 @@ async function login() {
     console.log(response);
 
     if (response.success == false) {
-        showToast("Login failed ", 'error');
+        showToast('Error', "Login failed ", 'error');
+        return;
     }
 
     if (response.redirect) {

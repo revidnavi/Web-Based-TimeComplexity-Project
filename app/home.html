@@ -45,8 +45,8 @@
     </div>
 
     <div id="analyzer-page">
-        <div id="algorithmCard" class="analyzer algorithmSelect">
-            <div class="analyzerCard-head">
+        <div id="algorithmCard" class="default-card algorithmSelect">
+            <div class="default-card-head">
                 <p class="main-text">Algorithm Configuration</p>
                 <p class="sub-text">Select an algorithm and configure input parameters</p>
             </div>
@@ -60,8 +60,8 @@
             <button id="runButton">Run</button>
         </div>
 
-        <div id="complexityCard" class="analyzer complexity" style="display: none;">
-            <div class="analyzerCard-head">
+        <div id="complexityCard" class="default-card complexity" style="display: none;">
+            <div class="default-card-head">
                 <p class="main-text">Theoretical Complexity</p>
                 <p class="sub-text" id="complexityHeading">Expected time and space complexity for the selected
                     algorithm.
@@ -82,8 +82,8 @@
 
         </div>
 
-        <div id="resultsCard" class="analyzer result" style="display: none;">
-            <div class="analyzerCard-head resultCard-head">
+        <div id="resultsCard" class="default-card result" style="display: none;">
+            <div class="default-card-head resultCard-head">
                 <p class="main-text">Latest Execution Result</p>
                 <p class="sub-text">Most recent algorithm execution analysis</p>
             </div>
@@ -119,7 +119,20 @@
         -->
     </div>
 
+    <div class="charts-page">
+        <div class="linechart-card">
+            <div></div>
+            <div></div>
+        </div>
+        <div class="barchart-card">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
 
+    <div class="history-page">
+
+    </div>
 
     <script type="module" src="js/home.js"></script>
 </body>

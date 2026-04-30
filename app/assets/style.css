@@ -319,6 +319,7 @@ body.home-page {
 
 .home-heading-card {
     background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(17, 24, 39, 0.12);
     position: fixed;
     top: 0;
     left: 0;
@@ -368,6 +369,8 @@ body.home-page {
 .header-tab:active {
     transform: scale(0.95);
 }
+
+#logoutButton { }
 
 .homeSwitch {
     background-color: #DBEAFE;
@@ -440,11 +443,18 @@ body.home-page {
     justify-content: center;
 }
 
-.analyzer {
+#analyzer-page {
+    width: 92%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.default-card {
     background-color: #ffffff;
     box-shadow: 0 4px 12px rgba(17, 24, 39, 0.12);
     border: 1px solid #BEDBFF;
-    width: 92%;
+    /* width: 92%; */
     max-width: none;
     margin: 1rem;
     display: flex;
@@ -455,16 +465,16 @@ body.home-page {
     overflow: visible;
 }
 
-.analyzer > * {
+.default-card > * {
     width: 100%;
     box-sizing: border-box;
 } 
 
-.analyzer > * {
+.default-card > * {
     line-height: 1.25;
 }
 
-.analyzerCard-head {
+.default-card-head {
     /* margin: 1rem 0; */
     background: linear-gradient(#EFF6FF,#F0F9FF);
     width: calc(100% + 3rem);
@@ -517,7 +527,7 @@ body.home-page {
     border: 1px solid #B7DEC7;
 }
 
-.result .analyzerCard-head {
+.result .default-card-head {
     background: linear-gradient(#DBF0E6, #E9F7F0);
 }
 

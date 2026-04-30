@@ -24,3 +24,9 @@
 
 /* Account Page  */
 
+body.account-page {
+    background: #F8FAFC;
+    min-height: 100vh;
+    height: auto;
+    overflow-y: auto;
+}

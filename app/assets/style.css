@@ -304,13 +304,13 @@ body {
 
 /* Home: Head tab card */
 
-.homeHeading-card .logo-container-home,
-.homeHeading-card .tabButton-home-card {
+.home-heading-card .logo-container-home,
+.home-heading-card .home-tab-card {
     display: flex;
     align-items: center;
 }
 
-.homeHeading-card {
+.home-heading-card {
     background-color: #ffffff;
     position: fixed;
     top: 0;
@@ -329,17 +329,33 @@ body {
 
 /* Home: Tab buttons */
 
-.homeHeading-card .tabButton-home-card {
-    gap: 12px;
-    justify-content: flex-start;
-}
-
-.homeHeading-card .tabButton-home-card button {
+.home-heading-card .home-tab-card {
     gap: 12px;
     justify-content: flex-start;
     padding: 8px 14px;
     border-color: #BEDBFF;
-    background-color: #EFF6FF;
+}
+
+#header-tab {
+    border-style: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    padding: 0.75rem;
+    font-weight: bold;
+    color: white;
+    background-color: #2563eb;
+    text-decoration: none;
+}
+
+#header-tab:hover {
+    background-color: #022164;
+    transition: ease-in 0.2s ;
+    transition-duration: 200ms;
+}
+
+#header-tab:active {
+    transform: scale(0.95);
 }
 
 #logoutButton {
@@ -410,10 +426,6 @@ body {
 
 .logo-container-home .logo-subtitle {
     justify-content: center;
-}
-
-.is-hidden {
-    display: none;
 }
 
 .analyzer {

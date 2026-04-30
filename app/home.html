@@ -13,7 +13,7 @@
 
 <body class="home-page">
     <!-- Home  Heading -->
-    <div class="homeHeading-card">
+    <div class="home-heading-card">
         <div class="logo-container logo-container-home">
             <div class="logo logo-home">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -29,8 +29,9 @@
                 <span class="logo-subtitle">Complexity Analyzer</span>
             </div>
         </div>
-        <div class="tabButton-home-card">
-            <a href="admin.html" id="admin-nav" style="display: none;">Admin</a>
+        <div class="home-tab-card">
+            <!-- <a href="admin.html" id="admin-nav" style="display: none;">Admin</a> -->
+            <a href="home.html" id="header-tab">Home</a>
             <button id="profile-button">Profile</button>
         </div>
     </div>
@@ -59,7 +60,7 @@
         <button id="runButton">Run</button>
     </div>
 
-    <div id="complexityCard" class="analyzer complexity is-hidden" style="display: none;">
+    <div id="complexityCard" class="analyzer complexity" style="display: none;">
         <div class="analyzerCard-head">
             <p class="main-text">Theoretical Complexity</p>
             <p class="sub-text" id="complexityHeading">Expected time and space complexity for the selected algorithm.
@@ -80,7 +81,7 @@
 
     </div>
 
-    <div id="resultsCard" class="analyzer result is-hidden" style="display: none;">
+    <div id="resultsCard" class="analyzer result" style="display: none;">
         <div class="analyzerCard-head resultCard-head">
             <p class="main-text">Latest Execution Result</p>
             <p class="sub-text">Most recent algorithm execution analysis</p>

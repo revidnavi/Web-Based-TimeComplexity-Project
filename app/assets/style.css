@@ -9,6 +9,10 @@ body {
     font-family: 'Inter', 'apple-system', 'BlinkMacSystemFont', 'Segoe UI', sans-serif;
 }
 
+body.home-page {
+    background: #F8FAFC;
+}
+
 /* utilities */
 
 .hidden {
@@ -336,25 +340,29 @@ body {
     border-color: #BEDBFF;
 }
 
-#header-tab {
+.header-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border-style: none;
     border-radius: 10px;
     cursor: pointer;
     text-align: center;
     padding: 0.75rem;
     font-weight: bold;
+    font-size: 1rem;
+    line-height: 1;
     color: white;
     background-color: #2563eb;
-    text-decoration: none;
 }
 
-#header-tab:hover {
+.header-tab:hover {
     background-color: #022164;
     transition: ease-in 0.2s ;
     transition-duration: 200ms;
 }
 
-#header-tab:active {
+.header-tab:active {
     transform: scale(0.95);
 }
 
@@ -431,6 +439,7 @@ body {
 .analyzer {
     background-color: #ffffff;
     box-shadow: 0 4px 12px rgba(17, 24, 39, 0.12);
+    border: 1px solid #BEDBFF;
     width: 92%;
     margin: 1rem 0;
     display: flex;

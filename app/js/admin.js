@@ -5,10 +5,21 @@ import { popupConfirm, popupMessage } from '../lib/popups.js';
 loginRedirect("admin.html");
 switchtoAlgoTab();
 
+document.getElementById("home-button").addEventListener("click", openHome);
+document.getElementById("profile-button").addEventListener("click", openProfile);
 document.getElementById("dashboard-btn").addEventListener("click", switchtoDashboardTab);
 document.getElementById("algorithms-btn").addEventListener("click", switchtoAlgoTab);
 document.getElementById("new-algo-button").addEventListener("click", showAlgoForm);
 document.getElementById("submit-algo").addEventListener("click", updateAlgo);
+
+
+function openProfile() {
+    window.location.href = 'account.html';
+}
+
+function openHome(){
+    window.location.href = 'home.html';
+}
 
 function switchtoAlgoTab() {
     loadAlgos();

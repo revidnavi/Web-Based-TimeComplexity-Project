@@ -8,6 +8,7 @@ loginRedirect("home.html");
 loadAlgorithms();
 showAdminButton();
 
+document.getElementById("home-button").addEventListener("click", openHome);
 document.getElementById("profile-button").addEventListener("click", openProfile);
 
 document.getElementById("runButton").addEventListener("click", runAlgorithm);
@@ -15,6 +16,10 @@ document.getElementById("algorithm").addEventListener("change", updateComplexity
 
 function openProfile() {
     window.location.href = 'account.html';
+}
+
+function openHome(){
+    window.location.href = 'home.html';
 }
 
 async function loadAlgorithms() {

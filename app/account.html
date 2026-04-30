@@ -36,26 +36,30 @@
         </div>
     </div>
 
-    <a href="admin.html" id="admin-nav" style="display: none;">Admin</a>
-    <button id="logout">Log out</button>
-    <hr>
-    <label for="email">Email:</label>
-    <input id="email" readonly value="sampleemail@email.com">
-    <br>
-    <label for="date">Created on:</label>
-    <span id="date">2026-67-69</span>
-    <br>
-    <button id="change-pass">Change password</button>
-    <div id="change-pass-form" style="display: none;">
-        <input type="password" id="new-pass-0" placeholder="New password">
+    <div class="analyzer">
+        <a href="admin.html" id="admin-nav" style="display: none;">Admin</a>
+        <button id="logout">Log out</button>
+        <hr>
+        <label for="email">Email:</label>
+        <input id="email" readonly value="sampleemail@email.com">
         <br>
-        <input type="password" id="new-pass-1" placeholder="Repeat new password">
+        <label for="date">Created on:</label>
+        <span id="date">2026-67-69</span>
         <br>
-        <input type="password" id="current-pass" placeholder="Current password">
-        <br>
-        <button id="cancel-button">Cancel</button>
-        <button id="submit-pass">Submit</button>
+        <button id="change-pass">Change password</button>
+        <div id="change-pass-form" style="display: none;">
+            <input type="password" id="new-pass-0" placeholder="New password">
+            <br>
+            <input type="password" id="new-pass-1" placeholder="Repeat new password">
+            <br>
+            <input type="password" id="current-pass" placeholder="Current password">
+            <br>
+            <button id="cancel-button">Cancel</button>
+            <button id="submit-pass">Submit</button>
+        </div>
+
     </div>
+
     <script type="module" src="js/account.js"></script>
 </body>
 

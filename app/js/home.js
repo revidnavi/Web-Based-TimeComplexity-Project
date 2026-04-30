@@ -22,6 +22,16 @@ function openHome(){
     window.location.href = 'home.html';
 }
 
+function showAnalyzer() {
+}
+
+
+function showCharts() {
+}
+
+function showHistory() {
+}
+
 async function loadAlgorithms() {
     const select = document.getElementById("algorithm");
     const result = await fetch(API_URL+"/home/get_active_algos.php");

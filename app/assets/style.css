@@ -11,6 +11,9 @@ body {
 
 body.home-page {
     background: #F8FAFC;
+    min-height: 100vh;
+    height: auto;
+    overflow-y: auto;
 }
 
 /* utilities */
@@ -366,8 +369,9 @@ body.home-page {
     transform: scale(0.95);
 }
 
-#logoutButton {
-    background-color: #F8FAFC;
+.homeSwitch {
+    background-color: #DBEAFE;
+    margin-top: 120px;
 }
 
 .case {
@@ -441,13 +445,14 @@ body.home-page {
     box-shadow: 0 4px 12px rgba(17, 24, 39, 0.12);
     border: 1px solid #BEDBFF;
     width: 92%;
-    margin: 1rem 0;
+    max-width: none;
+    margin: 1rem;
     display: flex;
     flex-direction: column;
     gap: 16px;
     padding: 1.5rem;
     border-radius: 0.75rem;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .analyzer > * {
@@ -462,10 +467,9 @@ body.home-page {
 .analyzerCard-head {
     /* margin: 1rem 0; */
     background: linear-gradient(#EFF6FF,#F0F9FF);
-    width: 100%;
+    width: calc(100% + 3rem);
     height: 100%;
     padding: 1.5rem;
-    margin: 1rem;
     margin: -1.5rem  -1.5rem 0;
     line-height: 1.5rem;
 }

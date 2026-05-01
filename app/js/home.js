@@ -4,17 +4,20 @@ import { loginRedirect } from '../lib/util.js';
 
 let algos = [];
 
-loginRedirect("home.html");
-loadAlgorithms();
-showAdminButton();
-
-document.getElementById("runButton").addEventListener("click", runAlgorithm);
-document.getElementById("algorithm").addEventListener("change", updateComplexity);
+document.addEventListener("DOMContentLoaded", async () => {   
+    loginRedirect("home.html");
+    await loadAlgorithms();
+    showAdminButton();
+    updateComplexity(); 
+    document.getElementById("runButton").addEventListener("click", runAlgorithm);
+    document.getElementById("algorithm").addEventListener("change", updateComplexity); 
+});
 
 async function loadAlgorithms() {
     const select = document.getElementById("algorithm");
     const result = await fetch(API_URL+"/home/get_active_algos.php");
     const response = await result.json();
+    console.log(response);
     algos = response.data;
     if (algos.length === 0) return;
 

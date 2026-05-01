@@ -4,18 +4,19 @@ import { loginRedirect } from '../lib/util.js';
 
 let algos = [];
 
-loginRedirect("home.html");
-loadAlgorithms();
-showAdminButton();
-
-document.getElementById("home-button").addEventListener("click", openHome);
-document.getElementById("profile-button").addEventListener("click", openProfile);
-document.getElementById("goToAnalyzer").addEventListener("click", showAnalyzer);
-document.getElementById("goToCharts").addEventListener("click", showCharts);
-document.getElementById("goToHistory").addEventListener("click", showHistory);
-
-document.getElementById("runButton").addEventListener("click", runAlgorithm);
-document.getElementById("algorithm").addEventListener("change", updateComplexity);
+document.addEventListener("DOMContentLoaded", async () => {   
+    loginRedirect("home.html");
+    await loadAlgorithms();
+    showAdminButton();
+    updateComplexity(); 
+    document.getElementById("home-button").addEventListener("click", openHome);
+    document.getElementById("profile-button").addEventListener("click", openProfile);
+    document.getElementById("goToAnalyzer").addEventListener("click", showAnalyzer);
+    document.getElementById("goToCharts").addEventListener("click", showCharts);
+    document.getElementById("goToHistory").addEventListener("click", showHistory);
+    document.getElementById("runButton").addEventListener("click", runAlgorithm);
+    document.getElementById("algorithm").addEventListener("change", updateComplexity); 
+});
 
 showAnalyzer();
 
@@ -59,6 +60,7 @@ async function loadAlgorithms() {
     const select = document.getElementById("algorithm");
     const result = await fetch(API_URL+"/home/get_active_algos.php");
     const response = await result.json();
+    console.log(response);
     algos = response.data;
     if (algos.length === 0) return;
 

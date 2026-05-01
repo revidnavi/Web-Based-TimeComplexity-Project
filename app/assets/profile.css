@@ -1,0 +1,58 @@
+
+/* Home Page  */
+
+#profile-button {
+    border-style: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    padding: 0.75rem;
+    font-weight: bold;
+    color: white;
+    background-color: #2563eb;
+}
+
+#profile-button:hover {
+    background-color: #022164;
+    transition: ease-in 0.2s ;
+    transition-duration: 200ms;
+}
+
+#pageButton:active {
+    transform: scale(0.95);
+}
+
+/* Account Page  */
+
+body.account-page {
+    background: #F8FAFC;
+    min-height: 100vh;
+    height: auto;
+    overflow-y: auto;
+}
+
+.default-card.profile-card{
+    width: 40%;
+}
+
+#logout {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    margin: 0 auto;
+}
+
+#change-pass {
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    margin: 0 auto; 
+}
+
+#email {
+    width: 200px;
+}

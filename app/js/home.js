@@ -9,9 +9,52 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadAlgorithms();
     showAdminButton();
     updateComplexity(); 
+    document.getElementById("home-button").addEventListener("click", openHome);
+    document.getElementById("profile-button").addEventListener("click", openProfile);
+    document.getElementById("goToAnalyzer").addEventListener("click", showAnalyzer);
+    document.getElementById("goToCharts").addEventListener("click", showCharts);
+    document.getElementById("goToHistory").addEventListener("click", showHistory);
     document.getElementById("runButton").addEventListener("click", runAlgorithm);
     document.getElementById("algorithm").addEventListener("change", updateComplexity); 
 });
+
+showAnalyzer();
+
+function openProfile() {
+    window.location.href = 'account.html';
+}
+
+function openHome(){
+    window.location.href = 'home.html';
+}
+
+function showAnalyzer() {
+    document.getElementById("analyzer-page").style.display = "block";
+    document.querySelector(".charts-page").style.display = "none";
+    document.querySelector(".history-page").style.display = "none";
+    document.getElementById("goToAnalyzer").classList.add("active");
+    document.getElementById("goToCharts").classList.remove("active");
+    document.getElementById("goToHistory").classList.remove("active");
+}
+
+
+function showCharts() {
+    document.getElementById("analyzer-page").style.display = "none";
+    document.querySelector(".charts-page").style.display = "block";
+    document.querySelector(".history-page").style.display = "none";
+    document.getElementById("goToAnalyzer").classList.remove("active");
+    document.getElementById("goToCharts").classList.add("active");
+    document.getElementById("goToHistory").classList.remove("active");
+}
+
+function showHistory() {
+    document.getElementById("analyzer-page").style.display = "none";
+    document.querySelector(".charts-page").style.display = "none";
+    document.querySelector(".history-page").style.display = "block";
+    document.getElementById("goToAnalyzer").classList.remove("active");
+    document.getElementById("goToCharts").classList.remove("active");
+    document.getElementById("goToHistory").classList.add("active");
+}
 
 async function loadAlgorithms() {
     const select = document.getElementById("algorithm");
@@ -128,6 +171,9 @@ async function showAdminButton() {
     let data = response.data;
 
     if (data['user type'] == "admin") {
-        document.getElementById("admin-nav").style.display = "inline";
+        const adminNav = document.getElementById("admin-nav");
+        if (adminNav) {
+            adminNav.style.display = "inline";
+        }
     }
 }

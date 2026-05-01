@@ -1,32 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/popups.css">
+    <link rel="stylesheet" href="assets/profile.css">
+    <link rel="stylesheet" href="assets/style.css">
+
     <title>Complexity Analyzer</title>
 </head>
-<body>
-    <a href="home.html">HOME</a>
-    <a href="admin.html" id="admin-nav" style="display: none;">Admin</a>
-    <button id="logout">Log out</button>
-    <hr>
-    <label for="email">Email:</label>
-    <input id="email" readonly value="sampleemail@email.com">
-    <br>
-    <label for="date">Created on:</label>
-    <span id="date">2026-67-69</span>
-    <br>
-    <button id="change-pass">Change password</button>
-    <div id="change-pass-form" style="display: none;">
-        <input type="password" id="new-pass-0" placeholder="New password">
-        <br>
-        <input type="password" id="new-pass-1" placeholder="Repeat new password">
-        <br>
-        <input type="password" id="current-pass" placeholder="Current password">
-        <br>
-        <button id="cancel-button">Cancel</button>
-        <button id="submit-pass">Submit</button>
+
+<body class="account-page">
+    <div class="home-heading-card">
+        <!-- <button class="home-heading-card" id="home-button">Home</button> -->
+        <div class="logo-container logo-container-home">
+            <div class="logo logo-home">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="currentColor" opacity="0.8" />
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </div>
+            <div class="logo-text logo-text-home">
+                <span class="logo-title">AlgoSpark</span>
+                <span class="logo-subtitle">Complexity Analyzer</span>
+            </div>
+        </div>
+        <div class="home-tab-card">
+            <!-- <a href="admin.html" id="admin-nav" style="display: none;">Admin</a> -->
+            <button id="home-button" class="header-tab">Home</button>
+            <button id="profile-button">Profile</button>
+        </div>
     </div>
+
+    <div class="default-card profile-card">
+        <a href="admin.html" id="admin-nav" style="display: none;">Admin</a>
+        <button id="logout" class="header-tab">Log out</button>
+        <hr>
+        <label for="email">Email:</label>
+        <input id="email" readonly value="sampleemail@email.com">
+        <br>
+        <label for="date">Created on:</label>
+        <span id="date">2026-67-69</span>
+        <br>
+        <button id="change-pass" class="header-tab">Change password</button>
+        <div id="change-pass-form" style="display: none;">
+            <input type="password" id="new-pass-0" placeholder="New password">
+            <br>
+            <input type="password" id="new-pass-1" placeholder="Repeat new password">
+            <br>
+            <input type="password" id="current-pass" placeholder="Current password">
+            <br><br>
+            <button id="cancel-button">Cancel</button>
+            <button id="submit-pass">Submit</button>
+        </div>
+
+    </div>
+
     <script type="module" src="js/account.js"></script>
 </body>
+
 </html>

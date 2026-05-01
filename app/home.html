@@ -7,12 +7,13 @@
     <link rel="stylesheet" href="assets/reset.css">
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/popups.css">
+    <link rel="stylesheet" href="assets/profile.css">
     <title>Complexity Analyzer</title>
 </head>
 
 <body class="home-page">
     <!-- Home  Heading -->
-    <div class="homeHeading-card">
+    <div class="home-heading-card">
         <div class="logo-container logo-container-home">
             <div class="logo logo-home">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,83 +29,85 @@
                 <span class="logo-subtitle">Complexity Analyzer</span>
             </div>
         </div>
-        <div class="tabButton-home-card">
-            <a href="admin.html" id="admin-nav" style="display: none;">Admin</a>
-            <a href="account.html">Profile</a>
+        <div class="home-tab-card">
+            <!-- <a href="admin.html" id="admin-nav" style="display: none;">Admin</a> -->
+            <button id="home-button" class="header-tab">Home</button>
+            <button id="profile-button">Profile</button>
         </div>
     </div>
 
     <div class="homeSwitch-card">
         <div class="tab-group homeSwitch">
-            <button class="tab active" id="">Analyzer</button>
-            <button class="tab" id="">Charts</button>
-            <button class="tab">History</button>
+            <button class="tab active" id="goToAnalyzer">Analyzer</button>
+            <button class="tab" id="goToCharts">Charts</button>
+            <button class="tab" id="goToHistory">History</button>
         </div>
     </div>
 
+    <div id="analyzer-page">
+        <div id="algorithmCard" class="default-card algorithmSelect">
+            <div class="default-card-head">
+                <p class="main-text">Algorithm Configuration</p>
+                <p class="sub-text">Select an algorithm and configure input parameters</p>
+            </div>
+            <p>Algorithm</p>
+            <select id="algorithm">
+                <option id="algoOptionPlaceholder">No Algorithm Available</option>
+            </select>
 
-    <div id="algorithmCard" class="analyzer algorithmSelect">
-        <div class="analyzerCard-head">
-            <p class="main-text">Algorithm Configuration</p>
-            <p class="sub-text">Select an algorithm and configure input parameters</p>
-        </div>
-        <p>Algorithm</p>
-        <select id="algorithm">
-            <option id="algoOptionPlaceholder">No Algorithm Available</option>
-        </select>
-
-        <p>Input Size</p>
-        <input type="number" id="size" placeholder="Input Size">
-        <button id="runButton">Run</button>
-    </div>
-
-    <div id="complexityCard" class="analyzer complexity is-hidden" style="display: none;">
-        <div class="analyzerCard-head">
-            <p class="main-text">Theoretical Complexity</p>
-            <p class="sub-text" id="complexityHeading">Expected time and space complexity for the selected algorithm.
-            </p>
-        </div>
-        <p>Decription</p>
-        <p class="sub-text">Description unavailable.</p>
-        <p>Time Complexity</p>
-        <div class="time-complexity-desc">
-            <p class="case best" id="best-time">Best: </p>
-            <p class="case average" id="avg-time">Average: </p>
-            <p class="case worst" id="worst-time">Worst: </p>
-        </div>
-        <p>Space Complexity</p>
-        <div class="space-complexity-desc">
-            <p class="case constant" id="space-complexity">O</p>
+            <p>Input Size</p>
+            <input type="number" id="size" placeholder="Input Size">
+            <button id="runButton">Run</button>
         </div>
 
-    </div>
+        <div id="complexityCard" class="default-card complexity" style="display: none;">
+            <div class="default-card-head">
+                <p class="main-text">Theoretical Complexity</p>
+                <p class="sub-text" id="complexityHeading">Expected time and space complexity for the selected
+                    algorithm.
+                </p>
+            </div>
+            <p>Decription</p>
+            <p class="sub-text">Description unavailable.</p>
+            <p>Time Complexity</p>
+            <div class="time-complexity-desc">
+                <p class="case best" id="best-time">Best: </p>
+                <p class="case average" id="avg-time">Average: </p>
+                <p class="case worst" id="worst-time">Worst: </p>
+            </div>
+            <p>Space Complexity</p>
+            <div class="space-complexity-desc">
+                <p class="case constant" id="space-complexity">O</p>
+            </div>
 
-    <div id="resultsCard" class="analyzer result is-hidden" style="display: none;">
-        <div class="analyzerCard-head resultCard-head">
-            <p class="main-text">Latest Execution Result</p>
-            <p class="sub-text">Most recent algorithm execution analysis</p>
         </div>
 
-        <div class="result-details">
-            <p class="result-label">Input Size:</p>
-            <p class="result-value" id="resultSize">-</p>
+        <div id="resultsCard" class="default-card result" style="display: none;">
+            <div class="default-card-head resultCard-head">
+                <p class="main-text">Latest Execution Result</p>
+                <p class="sub-text">Most recent algorithm execution analysis</p>
+            </div>
 
-            <p class="result-label">Execution Time:</p>
-            <p class="result-value" id="resultTime">-</p>
+            <div class="result-details">
+                <p class="result-label">Input Size:</p>
+                <p class="result-value" id="resultSize">-</p>
 
-            <p class="result-label">Timestamp:</p>
-            <p class="result-value" id="resultTimestamp">-</p>
+                <p class="result-label">Execution Time:</p>
+                <p class="result-value" id="resultTime">-</p>
+
+                <p class="result-label">Timestamp:</p>
+                <p class="result-value" id="resultTimestamp">-</p>
+            </div>
+
+            <div class="result-note">
+                <p class="result-note-title">Note:</p>
+                <p class="sub-text">Empirical runtime may differ from theoretical complexity due to: JavaScript engine
+                    optimizations, hardware variations, input data distribution, garbage collection, and other runtime
+                    factors.</p>
+            </div>
         </div>
 
-        <div class="result-note">
-            <p class="result-note-title">Note:</p>
-            <p class="sub-text">Empirical runtime may differ from theoretical complexity due to: JavaScript engine
-                optimizations, hardware variations, input data distribution, garbage collection, and other runtime
-                factors.</p>
-        </div>
-    </div>
-
-    <!-- Heading Card: 
+        <!-- Heading Card: 
                 Buttons: needs improvement
             Algorithm Card: Cannot scroll page
                 Home switch buttons not yet working
@@ -114,7 +117,22 @@
                 not yet hidden as default   
                 Many components are WIP.
         -->
+    </div>
 
+    <div class="charts-page">
+        <div class="linechart-card">
+            <div></div>
+            <div></div>
+        </div>
+        <div class="barchart-card">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div class="history-page">
+
+    </div>
 
     <script type="module" src="js/home.js"></script>
 </body>

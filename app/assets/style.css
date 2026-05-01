@@ -9,6 +9,13 @@ body {
     font-family: 'Inter', 'apple-system', 'BlinkMacSystemFont', 'Segoe UI', sans-serif;
 }
 
+body.home-page {
+    background: #F8FAFC;
+    min-height: 100vh;
+    height: auto;
+    overflow-y: auto;
+}
+
 /* utilities */
 
 .hidden {
@@ -304,14 +311,15 @@ body {
 
 /* Home: Head tab card */
 
-.homeHeading-card .logo-container-home,
-.homeHeading-card .tabButton-home-card {
+.home-heading-card .logo-container-home,
+.home-heading-card .home-tab-card {
     display: flex;
     align-items: center;
 }
 
-.homeHeading-card {
+.home-heading-card {
     background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(17, 24, 39, 0.12);
     position: fixed;
     top: 0;
     left: 0;
@@ -329,21 +337,42 @@ body {
 
 /* Home: Tab buttons */
 
-.homeHeading-card .tabButton-home-card {
-    gap: 12px;
-    justify-content: flex-start;
-}
-
-.homeHeading-card .tabButton-home-card button {
+.home-heading-card .home-tab-card {
     gap: 12px;
     justify-content: flex-start;
     padding: 8px 14px;
     border-color: #BEDBFF;
-    background-color: #EFF6FF;
 }
 
-#logoutButton {
-    background-color: #F8FAFC;
+.header-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-style: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    padding: 0.75rem;
+    font-weight: bold;
+    color: white;
+    background-color: #2563eb;
+}
+
+.header-tab:hover {
+    background-color: #022164;
+    transition: ease-in 0.2s ;
+    transition-duration: 200ms;
+}
+
+.header-tab:active {
+    transform: scale(0.95);
+}
+
+#logoutButton { }
+
+.homeSwitch {
+    background-color: #DBEAFE;
+    margin-top: 120px;
 }
 
 .case {
@@ -412,41 +441,46 @@ body {
     justify-content: center;
 }
 
-.is-hidden {
-    display: none;
+#analyzer-page {
+    width: 92%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.analyzer {
+.default-card {
     background-color: #ffffff;
     box-shadow: 0 4px 12px rgba(17, 24, 39, 0.12);
-    width: 92%;
-    margin: 1rem 0;
+    border: 1px solid #BEDBFF;
+    /* width: 92%; */
+    max-width: none;
+    margin: 1rem;
     display: flex;
     flex-direction: column;
     gap: 16px;
     padding: 1.5rem;
     border-radius: 0.75rem;
-    overflow: hidden;
+    overflow: visible;
 }
 
-.analyzer > * {
+.default-card > * {
     width: 100%;
     box-sizing: border-box;
 } 
 
-.analyzer > * {
+.default-card > * {
     line-height: 1.25;
 }
 
-.analyzerCard-head {
+.default-card-head {
     /* margin: 1rem 0; */
     background: linear-gradient(#EFF6FF,#F0F9FF);
-    width: 100%;
+    width: calc(100% + 3rem);
     height: 100%;
     padding: 1.5rem;
-    margin: 1rem;
     margin: -1.5rem  -1.5rem 0;
     line-height: 1.5rem;
+    /* border-radius: 0.75rem; */
 }
 
 .main-text {
@@ -492,7 +526,7 @@ body {
     border: 1px solid #B7DEC7;
 }
 
-.result .analyzerCard-head {
+.result .default-card-head {
     background: linear-gradient(#DBF0E6, #E9F7F0);
 }
 

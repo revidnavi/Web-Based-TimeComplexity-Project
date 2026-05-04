@@ -1,8 +1,12 @@
 import { API_URL } from '../conf/api.js';
 import { bubbleSort, mergeSort, binarySearch, linearSearch, fibonacciRecursive, fibonacciDP } from '../lib/algorithms.js';
 import { loginRedirect } from '../lib/util.js';
+import { popupConfirm } from '../lib/popups.js'
 
 let algos = [];
+
+let currentPage = 1;
+let totalPages = 1;
 
 document.addEventListener("DOMContentLoaded", async () => {   
     loginRedirect("home.html");
@@ -15,7 +19,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("goToCharts").addEventListener("click", showCharts);
     document.getElementById("goToHistory").addEventListener("click", showHistory);
     document.getElementById("runButton").addEventListener("click", runAlgorithm);
-    document.getElementById("algorithm").addEventListener("change", updateComplexity); 
+    document.querySelector(".btn-clear").addEventListener("click", clearHistory);
+    document.getElementById("algorithm").addEventListener("change", updateComplexity);
+
+    initPagination();
 });
 
 showAnalyzer();
@@ -47,13 +54,105 @@ function showCharts() {
     document.getElementById("goToHistory").classList.remove("active");
 }
 
-function showHistory() {
+function initPagination() {
+    document.getElementById("nextPage").addEventListener("click", () => {
+        if (currentPage < totalPages) {
+            loadHistory(currentPage + 1);
+        }
+    });
+
+    document.getElementById("prevPage").addEventListener("click", () => {
+        if (currentPage > 1) {
+            loadHistory(currentPage - 1);
+        }
+    });
+}
+
+async function showHistory() {
     document.getElementById("analyzer-page").style.display = "none";
     document.querySelector(".charts-page").style.display = "none";
     document.querySelector(".history-page").style.display = "block";
     document.getElementById("goToAnalyzer").classList.remove("active");
     document.getElementById("goToCharts").classList.remove("active");
     document.getElementById("goToHistory").classList.add("active");
+
+
+    currentPage = 1;
+    await loadHistory(1);
+}
+
+async function loadHistory(page = 1) {
+    const response = await fetch(`${API_URL}/home/get_result.php?page=${page}`);
+    const result = await response.json();
+
+    const tbody = document.getElementById("history-tbody");
+    const count = document.getElementById("history-count");
+
+    tbody.innerHTML = "";
+
+    if (!result.success || !result.data.length) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5" class="no-data">
+                    No executions yet. Run Algorithm to see results.
+                </td>
+            </tr>
+        `;
+        count.textContent = 0;
+        return;
+    }
+
+    currentPage = result.page;
+    totalPages = result.pages;
+
+    count.textContent = result.total;
+
+    document.getElementById("pageNumber").innerText =
+        `${currentPage} / ${totalPages}`;
+
+    result.data.forEach(row => {
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+            <td>${row.algo_name}</td>
+            <td><span class="category-badge">${row.category}</span></td>
+            <td>${row.input_size}</td>
+            <td>${Number(row.execution_time).toFixed(3)} ms</td>
+            <td>${new Date(row.created_at).toLocaleString()}</td>
+        `;
+
+        tbody.appendChild(tr);
+    });
+
+    document.getElementById("prevPage").disabled = currentPage === 1;
+    document.getElementById("nextPage").disabled = currentPage === totalPages;
+}
+
+async function clearHistory() {
+    const confirmed = await popupConfirm("Are you sure you want to clear all execution history?");
+    console.log("Confirmed:", confirmed)
+    if (!confirmed) return;
+
+
+    const result = await fetch(API_URL + "/home/clear_result.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    const data = await result.json();
+
+    if (data.redirect) {
+        window.location.href = data.redirect;
+        return;
+    }
+
+    if (data.success) {
+        await loadHistory(1);
+    } else {
+        console.log("Failed to clear history"); 
+    }
 }
 
 async function loadAlgorithms() {

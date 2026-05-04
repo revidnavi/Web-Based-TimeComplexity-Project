@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/popups.css">
     <link rel="stylesheet" href="assets/profile.css">
+    <link rel="stylesheet" href="assets/history.css">
     <title>Complexity Analyzer</title>
 </head>
 
@@ -43,6 +44,8 @@
             <button class="tab" id="goToHistory">History</button>
         </div>
     </div>
+
+    <!-- Analyzer Page  -->
 
     <div id="analyzer-page">
         <div id="algorithmCard" class="default-card algorithmSelect">
@@ -119,6 +122,8 @@
         -->
     </div>
 
+    <!-- Charts Page  -->
+
     <div class="charts-page">
         <div class="linechart-card">
             <div></div>
@@ -130,8 +135,50 @@
         </div>
     </div>
 
-    <div class="history-page">
 
+    <!-- History Page  -->
+    <div class="history-page">
+        <div class="history-card">
+            <div class="history-header">
+                <div class="header-with-actions">
+                    <div>
+                        <h3>Execution History</h3>
+                        <p>All Algorithm execution (<span id="history-count">0</span>)</p>
+                    </div>
+                    <button class="btn-clear">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                        Clear All
+                    </button>
+                </div>
+            </div>
+            <div class="card-content">
+                <table id="history-table">
+                    <thead>
+                        <tr>
+                            <th>Algorithm</th>
+                            <th>Category</th>
+                            <th>Input Size</th>
+                            <th>Time (ms)</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-tbody">
+                        <tr>
+                            <td colspan="5" class="no-data">No executions yet. Run Algorithm to see results.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <button id="prevPage">Previous</button>
+                    <span id="pageNumber">1 / 1</span>
+                    <button id="nextPage">Next</button>
+                </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script type="module" src="js/home.js"></script>

@@ -7,75 +7,162 @@
     <link rel="stylesheet" href="assets/popups.css">
     <link rel="stylesheet" href="assets/profile.css">
     <link rel="stylesheet" href="assets/style.css">
-    <title>Complexity Analyzer</title>
+    <link rel="stylesheet" href="assets/admin.css">
+    <title>Complexity Analyzer — Admin</title>
 </head>
 <body>
+
+    <!-- ── Fixed top header (same as other pages) ── -->
     <div class="home-heading-card">
         <div class="logo-container logo-container-home">
             <div class="logo logo-home">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="currentColor" opacity="0.8" />
-                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </div>
             <div class="logo-text logo-text-home">
                 <span class="logo-title">AlgoSpark</span>
-                <span class="logo-subtitle">Complexity Analyzer</span>
+                <span class="logo-subtitle">Admin Panel</span>
             </div>
         </div>
         <div class="home-tab-card">
-            <button id="dashboard-btn" class="header-tab">Dashboard</button> 
+            <button id="dashboard-btn" class="header-tab">Dashboard</button>
             <button id="algorithms-btn" class="header-tab">Algorithms</button>
-            <button id="home-button"  class="header-tab">Home</button>
+            <button id="home-button"    class="header-tab">Home</button>
             <button id="profile-button" class="header-tab">Profile</button>
         </div>
     </div>
 
-    <hr>
-    
+    <!-- ══════════════════════════════════════════
+         DASHBOARD SECTION
+         Shown when Dashboard tab is active
+    ══════════════════════════════════════════ -->
     <div id="dashboard">
-        <div id="chart-container">
-            <h2>All of users' run results:</h2>
-            <canvas id="theChart"></canvas>
+
+        <!-- Chart card -->
+        <div class="admin-card">
+            <div class="admin-card-head">
+                <div>
+                    <h2>Run Results</h2>
+                    <p>All algorithm runs across all users</p>
+                </div>
+            </div>
+            <div class="admin-card-body">
+                <div id="chart-container">
+                    <canvas id="theChart"></canvas>
+                </div>
+            </div>
         </div>
-        <hr>
-        <h2>Users:</h2>
-        <div id="user-container">
-            
+
+        <!-- Users card -->
+        <div class="admin-card">
+            <div class="admin-card-head">
+                <div>
+                    <h2>Users</h2>
+                    <p>Registered accounts</p>
+                </div>
+            </div>
+            <div class="admin-card-body">
+                <div id="user-container">
+                    <!-- user cards injected by admin.js -->
+                </div>
+            </div>
         </div>
-        <template id="user-template">
-            <p>Email: <span class="email"></span></p>
-            <p>Created at: <span class="create-at"></span></p>
-            <p>Activated: <span class="activated"></span></p>
-            <button class="deact-user">Deactivate</button>
-        </template>
+
     </div>
 
-    <div id="algos" style="display: none;"> 
-        <div id="algos-container">
-            
+    <!-- User card template — JS clones this per user -->
+    <template id="user-template">
+        <div class="user-card">
+            <!-- Avatar initials are set by JS: element.querySelector('.user-avatar') -->
+            <div class="user-avatar"></div>
+
+            <div class="user-card-row">
+                <span class="user-card-label">Email</span>
+                <span class="user-card-value email"></span>
+            </div>
+            <div class="user-card-row">
+                <span class="user-card-label">Joined</span>
+                <span class="user-card-value create-at"></span>
+            </div>
+            <div class="user-card-row">
+                <span class="user-card-label">Status</span>
+                <!-- JS sets .badge-active or .badge-inactive on this element -->
+                <span class="badge activated"></span>
+            </div>
+
+            <button class="deact-user">Deactivate</button>
         </div>
-        <hr>
-        <button id="new-algo-button">Add new algorithm</button>
-        <div id="algo-form" style="display: none;">
-            <h3 id="algo-form-title">Add new algorithm</h3>
-            <input type="hidden" id="algo-id">
-            <input type="text" id="algo-name" placeholder="Algorithm name">
-            <input type="text" id="category" placeholder="Category">
-            <input type="text" id="time-best" placeholder="Time best">
-            <input type="text" id="time-avg" placeholder="Time avg">
-            <input type="text" id="time-worst" placeholder="Time worst">
-            <input type="text" id="space-complexity" placeholder="Space complexity">
-            <label for="algo-active">Active:</label>
-                <input type="checkbox" id="algo-active">
-            <button id="submit-algo">Submit</button>
+    </template>
+
+
+    <!-- ══════════════════════════════════════════
+         ALGORITHMS SECTION
+         Shown when Algorithms tab is active
+    ══════════════════════════════════════════ -->
+    <div id="algos" style="display: none;">
+
+        <div class="admin-card">
+            <div class="admin-card-head">
+                <div>
+                    <h2>Algorithms</h2>
+                    <p>Manage the algorithm library</p>
+                </div>
+                <!-- "Add" button lives in the header for easy access -->
+                <button id="new-algo-button">Add algorithm</button>
+            </div>
+            <div class="admin-card-body">
+
+                <!-- Add / edit form — hidden by default, shown by JS -->
+                <div id="algo-form" style="display: none;">
+                    <h3 id="algo-form-title">Add new algorithm</h3>
+                    <input type="hidden" id="algo-id">
+
+                    <!-- Two-column grid wraps all text inputs -->
+                    <div class="algo-form-grid">
+                        <input class="full" type="text" id="algo-name"        placeholder="Algorithm name">
+                        <input             type="text" id="category"          placeholder="Category">
+                        <input             type="text" id="time-best"         placeholder="Time best  (e.g. O(n))">
+                        <input             type="text" id="time-avg"          placeholder="Time average">
+                        <input             type="text" id="time-worst"        placeholder="Time worst">
+                        <input             type="text" id="space-complexity"  placeholder="Space complexity">
+                    </div>
+
+                    <div class="algo-form-check">
+                        <input type="checkbox" id="algo-active">
+                        <label for="algo-active">Active (visible to users)</label>
+                    </div>
+
+                    <div class="algo-form-actions">
+                        <button id="cancel-algo" type="button">Cancel</button>
+                        <button id="submit-algo" type="button">Save algorithm</button>
+                    </div>
+                </div>
+
+                <!-- Column headers for the algorithm list -->
+                <div class="algo-list-header" style="margin-top: 1.25rem;">
+                    <span>Name</span>
+                    <span>Category</span>
+                    <span>Best</span>
+                    <span>Average</span>
+                    <span>Worst</span>
+                    <span>Space</span>
+                    <span>Status</span>
+                    <span></span><!-- actions column -->
+                </div>
+
+                <!-- Algorithm rows injected here by admin.js -->
+                <div id="algos-container"></div>
+
+            </div>
         </div>
+
     </div>
-    
-    <template id="algo-card-template"> <!-- Template for the algorithm card that goes in algos-container-->
+
+    <!-- Algorithm card template — JS clones this per algorithm -->
+    <template id="algo-card-template">
         <div class="algo-card">
             <span class="algo-name"></span>
             <span class="category"></span>
@@ -83,12 +170,59 @@
             <span class="time-avg"></span>
             <span class="time-worst"></span>
             <span class="space-complexity"></span>
-            <span class="active"></span>
-            <button class="edit-algo">Edit</button>
-            <button class="delete-algo">Delete</button>
+            <!-- JS sets .badge-active / .badge-inactive on this -->
+            <span class="badge active"></span>
+            <div class="algo-actions">
+                <button class="edit-algo">Edit</button>
+                <button class="delete-algo">Delete</button>
+            </div>
         </div>
     </template>
-    
+
     <script type="module" src="js/admin.js"></script>
+
+    <!-- 
+        Form show/hide helpers.
+        These run after admin.js so they don't conflict with your module logic.
+        If your admin.js already handles these, remove this block.
+    -->
+    <script>
+        const algoForm      = document.getElementById('algo-form');
+        const newAlgoBtn    = document.getElementById('new-algo-button');
+        const cancelAlgoBtn = document.getElementById('cancel-algo');
+        const algoFormTitle = document.getElementById('algo-form-title');
+
+        function showForm(title) {
+            algoFormTitle.textContent = title || 'Add new algorithm';
+            algoForm.style.display = 'flex';
+            algoForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function hideForm() {
+            algoForm.style.display = 'none';
+            // Clear all text inputs
+            algoForm.querySelectorAll('input[type="text"]').forEach(i => i.value = '');
+            document.getElementById('algo-id').value = '';
+            document.getElementById('algo-active').checked = false;
+        }
+
+        // "+ Add algorithm" button toggles the form open
+        newAlgoBtn.addEventListener('click', () => {
+            if (algoForm.style.display === 'flex') {
+                hideForm();
+            } else {
+                showForm('Add new algorithm');
+            }
+        });
+
+        // Cancel always hides the form
+        cancelAlgoBtn.addEventListener('click', hideForm);
+
+        // Expose helpers so admin.js can call them:
+        //   window.showAlgoForm('Edit algorithm')  — call before populating fields
+        //   window.hideAlgoForm()                  — call after successful submit
+        window.showAlgoForm = showForm;
+        window.hideAlgoForm = hideForm;
+    </script>
 </body>
 </html>

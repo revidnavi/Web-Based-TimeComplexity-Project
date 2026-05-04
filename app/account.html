@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="assets/popups.css">
     <link rel="stylesheet" href="assets/profile.css">
     <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/account-override.css">
+    
 
     <title>Complexity Analyzer</title>
 </head>
@@ -32,31 +34,52 @@
         <div class="home-tab-card">
             <!-- <a href="admin.html" id="admin-nav" style="display: none;">Admin</a> -->
             <button id="home-button" class="header-tab">Home</button>
-            <button id="profile-button">Profile</button>
+            <button id="profile-button" class="header-tab">Profile</button>
         </div>
     </div>
 
     <div class="default-card profile-card">
-        <a href="admin.html" id="admin-nav" style="display: none;">Admin</a>
-        <button id="logout" class="header-tab">Log out</button>
-        <hr>
-        <label for="email">Email:</label>
-        <input id="email" readonly value="sampleemail@email.com">
-        <br>
-        <label for="date">Created on:</label>
-        <span id="date">2026-67-69</span>
-        <br>
-        <button id="change-pass" class="header-tab">Change password</button>
-        <div id="change-pass-form" style="display: none;">
-            <input type="password" id="new-pass-0" placeholder="New password">
-            <br>
-            <input type="password" id="new-pass-1" placeholder="Repeat new password">
-            <br>
-            <input type="password" id="current-pass" placeholder="Current password">
-            <br><br>
-            <button id="cancel-button">Cancel</button>
-            <button id="submit-pass">Submit</button>
-        </div>
+
+  <div class="profile-card-header">
+    <div class="profile-card-header-text">
+      <h2>Account</h2>
+      <p>Profile and Security</p>
+    </div>
+    <!-- For admins, insert #admin-nav here before #logout -->
+    <a href="admin.html" id="admin-nav" style="display: none;">Admin</a>
+    <button id="logout">Log out</button>
+  </div>
+
+  <div class="profile-card-body">
+
+    <div class="profile-field">
+      <label>Email</label>
+      <input id="email" readonly value="sampleemail@email.com">
+    </div>
+
+    <div class="profile-field">
+      <label>Member since</label>
+      <input id="date" readonly value="January 1, 2026">
+    </div>
+
+    <hr>
+
+    <p class="profile-section-label">Security</p>
+
+    <button id="change-pass">Change password</button>
+
+    <div id="change-pass-form" style="display: none;">
+      <input type="password" id="new-pass-0" placeholder="New password">
+      <input type="password" id="new-pass-1" placeholder="Confirm new password">
+      <input type="password" id="current-pass" placeholder="Current password">
+      <div class="pass-form-actions">
+        <button id="cancel-button">Cancel</button>
+        <button id="submit-pass">Update password</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
     </div>
 

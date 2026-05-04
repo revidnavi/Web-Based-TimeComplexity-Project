@@ -2,16 +2,43 @@ import { API_URL } from '../conf/api.js';
 import { loginRedirect } from '../lib/util.js';
 import { popupConfirm, popupMessage } from '../lib/popups.js';
 
-loginRedirect("admin.html");
-switchtoAlgoTab();
+const lineChart = new Chart(document.getElementById('theChart'), {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: []
+    },
+    options: {
+        scales: {
+            x: {
+                type: 'linear',
+                title: {
+                    display: true,
+                    text: 'Input Size'
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Execution Time'
+                }
+            }
+        }
+    }   
+});
 
-document.getElementById("home-button").addEventListener("click", openHome);
-document.getElementById("profile-button").addEventListener("click", openProfile);
-document.getElementById("dashboard-btn").addEventListener("click", switchtoDashboardTab);
-document.getElementById("algorithms-btn").addEventListener("click", switchtoAlgoTab);
-document.getElementById("new-algo-button").addEventListener("click", showAlgoForm);
-document.getElementById("submit-algo").addEventListener("click", updateAlgo);
+document.addEventListener("DOMContentLoaded", async () => {  
+    loginRedirect("admin.html");
+    await loadChartData();
+    switchtoDashboardTab();
 
+    document.getElementById("home-button").addEventListener("click", openHome);
+    document.getElementById("profile-button").addEventListener("click", openProfile);
+    document.getElementById("dashboard-btn").addEventListener("click", switchtoDashboardTab);
+    document.getElementById("algorithms-btn").addEventListener("click", switchtoAlgoTab);
+    document.getElementById("new-algo-button").addEventListener("click", showAlgoForm);
+    document.getElementById("submit-algo").addEventListener("click", updateAlgo);
+});
 
 function openProfile() {
     window.location.href = 'account.html';
@@ -161,4 +188,38 @@ async function loadAlgos() {
 
         algosContainer.appendChild(algoCard);
     }
+}
+
+async function loadChartData() {
+    const lineResult = await fetch(API_URL + "/admin/get_chart_data.php", {
+        credentials: "include"
+    });
+    const lineResponse = await lineResult.json();
+    console.log(lineResponse);
+    if (!lineResponse.success) return;
+
+    const lineData = lineResponse.data;
+
+    const labelsSet = new Set();
+    const lineDatasets = [];
+
+    Object.keys(lineData).forEach(algoName => {
+        const points = lineData[algoName];
+
+        const dataset = points.map(p => {
+            labelsSet.add(p.input_size);
+            return { x: p.input_size, y: p.execution_time };
+        });
+
+        lineDatasets.push({
+            label: algoName,
+            data: dataset,
+            borderWidth: 2
+        });
+    });
+
+    const labels = Array.from(labelsSet).sort((a, b) => a - b);
+
+    lineChart.data.datasets = lineDatasets;
+    lineChart.update();
 }

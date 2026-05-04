@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="assets/popups.css">
     <link rel="stylesheet" href="assets/profile.css">
     <link rel="stylesheet" href="assets/style.css">
@@ -35,8 +36,20 @@
 
     <hr>
     
-    <div id="dashboard" style="display: none;">
-        <p>insert graph, data summaries, idk</p>
+    <div id="dashboard">
+        <div id="chart-container">
+            <h1>All Users' Results</h1>
+            <canvas id="theChart"></canvas>
+        </div>
+        
+        <div id="user-container">
+            <template id="user-template">
+                <p>Email: <span class="email"></span></p>
+                <p>Created at: <span class="create-at"></span></p>
+                <button class="change-pass">Change Password</button>
+                <button class="deact-user">Deactivate</button>
+            </template>
+        </div>
     </div>
 
     <div id="algos" style="display: none;"> 

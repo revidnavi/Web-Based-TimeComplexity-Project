@@ -230,12 +230,7 @@ async function showAdminButton() {
 }
 
 async function loadChartData() {
-    const lineResult = await fetch(API_URL + "/home/get_chart_data.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chart: "line" })
-    });
-
+    const lineResult = await fetch(API_URL + "/home/get_chart_data.php");
     const lineResponse = await lineResult.json();
     if (!lineResponse.success) return;
 
@@ -265,12 +260,7 @@ async function loadChartData() {
     lineChart.data.datasets = lineDatasets;
     lineChart.update();
 
-    const barResult = await fetch(API_URL + "/home/get_chart_data.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chart: "bar" })
-    });
-
+    const barResult = await fetch(API_URL + "/home/get_chart_data.php");
     const barResponse = await barResult.json();
     if (!barResponse.success) return;
 

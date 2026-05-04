@@ -24,13 +24,13 @@ function insert_result($conn, $user_id, $algo_id, $size, $time, $space) {
 
 
 
-function get_last_10results($conn, $user_id) {
+function get_chart_data($conn, $user_id) {
     $stmt = $conn->prepare(
         "SELECT r.input_size, r.execution_time, r.space_usage, a.algo_name
         FROM results r
         JOIN algorithms a ON r.algo_id = a.id
         WHERE r.user_id = ?
-        ORDER BY r.created_at DESC
+        ORDER BY r.execution_time ASC
         LIMIT 10"
     );
     $stmt->bind_param("i", $user_id);

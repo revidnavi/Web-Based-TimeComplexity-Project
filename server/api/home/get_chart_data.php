@@ -10,7 +10,7 @@ login_block();
 
 try {
     $conn = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
-    $chartData = get_last_10results($conn, $_SESSION['userID']);
+    $chartData = get_chart_data($conn, $_SESSION['userID']);
 
     echo json_encode([
         "success" => true,

@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadAlgorithms();
     showAdminButton();
     updateComplexity(); 
-    loadChartData();
+    await loadChartData();
     document.getElementById("home-button").addEventListener("click", openHome);
     document.getElementById("profile-button").addEventListener("click", openProfile);
     document.getElementById("goToAnalyzer").addEventListener("click", showAnalyzer);
@@ -59,7 +59,8 @@ function showAnalyzer() {
 }
 
 
-function showCharts() {
+async function showCharts() {
+    await loadChartData();
     document.getElementById("analyzer-page").style.display = "none";
     document.querySelector(".charts-page").style.display = "block";
     document.querySelector(".history-page").style.display = "none";
@@ -208,6 +209,13 @@ async function loadChartData() {
     let lineChartData = [];
     let barChartLabels = [];
     let barChartData = [];
+
+    lineChart.data.labels = lineChartLabels;
+    lineChart.data.datasets[0].data = lineChartData;
+    lineChart.update();
+    barChart.data.labels = barChartLabels;
+    barChart.data.datasets[0].data = barChartData;
+    barChart.update();
 
     response.data.forEach(item => {
         lineChartLabels.push(item.algo_name + " (" + item.input_size + ")");

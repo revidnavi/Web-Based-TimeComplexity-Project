@@ -38,18 +38,20 @@
     
     <div id="dashboard">
         <div id="chart-container">
-            <h1>All Users' Results</h1>
+            <h2>All of users' run results:</h2>
             <canvas id="theChart"></canvas>
         </div>
-        
+        <hr>
+        <h2>Users:</h2>
         <div id="user-container">
-            <template id="user-template">
-                <p>Email: <span class="email"></span></p>
-                <p>Created at: <span class="create-at"></span></p>
-                <button class="change-pass">Change Password</button>
-                <button class="deact-user">Deactivate</button>
-            </template>
+            
         </div>
+        <template id="user-template">
+            <p>Email: <span class="email"></span></p>
+            <p>Created at: <span class="create-at"></span></p>
+            <p>Activated: <span class="activated"></span></p>
+            <button class="deact-user">Deactivate</button>
+        </template>
     </div>
 
     <div id="algos" style="display: none;"> 

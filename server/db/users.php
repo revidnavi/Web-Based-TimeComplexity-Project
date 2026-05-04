@@ -13,7 +13,7 @@ function insert_user($conn, $email, $hashedPass) {
 
 
 function get_hashed_pass_by_email($conn, $email) {
-    $stmt = $conn->prepare("SELECT hashed_pass FROM users WHERE email = ? LIMIT 1");
+    $stmt = $conn->prepare("SELECT hashed_pass FROM users WHERE email = ? AND activated = 1 LIMIT 1");
     $stmt->bind_param("s", $email); 
 
     $stmt->execute();
@@ -115,4 +115,36 @@ function get_user_info($conn, $userID) {
         "email" => $email,
         "created_at" => $created_at
     ];
+}
+
+
+
+function edit_user($conn, $userID, $attribute, $newValue) {
+    $query = "UPDATE users SET $attribute = ? WHERE id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("si", $newValue, $userID);
+
+    $success = $stmt->execute();
+
+    $stmt->close();
+    return $success;
+}
+
+
+
+function get_users($conn) {
+    $query = "SELECT id, email, created_at, activated FROM users";
+    $result = $conn->query($query);
+
+    $users = [];
+    while ($row = $result->fetch_assoc()) {
+        $users[] = [
+            "id" => $row["id"],
+            "email" => $row["email"],
+            "created_at" => $row["created_at"],
+            "activated" => $row["activated"]
+        ];
+    }
+
+    return $users;
 }

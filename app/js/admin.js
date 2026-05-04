@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     loginRedirect("admin.html");
     await loadChartData();
     switchtoDashboardTab();
+    loadUsers();
 
     document.getElementById("home-button").addEventListener("click", openHome);
     document.getElementById("profile-button").addEventListener("click", openProfile);
@@ -222,4 +223,57 @@ async function loadChartData() {
 
     lineChart.data.datasets = lineDatasets;
     lineChart.update();
+}
+
+
+
+async function loadUsers() {
+    const result = await fetch(API_URL+"/admin/get_users.php", {
+        credentials: "include"
+    });
+    const response = await result.json();
+    console.log(response);
+    let users = response.data;
+
+    let usersContainer = document.getElementById("user-container");
+    let userCardTemplate = document.getElementById("user-template");
+
+    usersContainer.innerHTML = "";
+    if (users.length === 0) return;
+
+    for (let i = 0; i < users.length; i++) {
+
+        let user = users[i];
+        let userCard = userCardTemplate.content.cloneNode(true);
+        userCard.querySelector(".create-at").textContent = user.created_at;
+        userCard.querySelector(".email").textContent = user.email;
+        userCard.querySelector(".activated").textContent = user.activated == "1";
+
+        if (user.activated == "1") {
+            userCard.querySelector(".deact-user").textContent = "Deactivate";
+        }
+        else {
+            userCard.querySelector(".deact-user").textContent = "Activate";
+        }
+
+        userCard.querySelector(".deact-user").addEventListener("click", async () => {
+            let confirmedDelete = await popupConfirm("Are you sure you want to de/activate this user?");
+
+            const result = await fetch(API_URL+"/admin/edit_user_attribute.php", {
+                method: "POST",
+                credentials: "include",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    user_id: user.id,
+                    attribute: "activated",
+                    value: (user.activated == 1) ? 0 : 1
+                })
+            });
+            const response = await result.json();
+            console.log(response);
+            loadUsers();
+        });
+
+        usersContainer.appendChild(userCard);
+    }
 }

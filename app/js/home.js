@@ -123,6 +123,7 @@ async function loadAlgorithms() {
 }
 
 function updateComplexity() {
+    if (algos.length == 0) return;
     let algoIndex = document.getElementById("algorithm").value;
     document.getElementById('complexityCard').style.display = "flex";
     document.getElementById('best-time').innerText = "Best: " + algos[algoIndex].time_best;

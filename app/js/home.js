@@ -3,12 +3,33 @@ import { bubbleSort, mergeSort, binarySearch, linearSearch, fibonacciRecursive, 
 import { loginRedirect } from '../lib/util.js';
 
 let algos = [];
+const lineChart = new Chart(document.getElementById('lineChart'), {
+  type: 'line',
+  data: {
+    labels: [],
+    datasets: [{
+      label: 'Execution Time vs Input Size',
+      data: []
+    }]
+  }
+});
+const barChart = new Chart(document.getElementById('barChart'), {
+  type: 'bar',
+  data: {
+    labels: [],
+    datasets: [{
+      label: 'Execution Time Distribution',
+      data: []  
+    }]
+  }
+});
 
 document.addEventListener("DOMContentLoaded", async () => {   
     loginRedirect("home.html");
     await loadAlgorithms();
     showAdminButton();
     updateComplexity(); 
+    loadChartData();
     document.getElementById("home-button").addEventListener("click", openHome);
     document.getElementById("profile-button").addEventListener("click", openProfile);
     document.getElementById("goToAnalyzer").addEventListener("click", showAnalyzer);
@@ -176,4 +197,29 @@ async function showAdminButton() {
             adminNav.style.display = "inline";
         }
     }
+}
+
+async function loadChartData() {
+    const result = await fetch(API_URL+"/home/get_chart_data.php");
+    const response = await result.json();
+    console.log(response);
+
+    let lineChartLabels = [];
+    let lineChartData = [];
+    let barChartLabels = [];
+    let barChartData = [];
+
+    response.data.forEach(item => {
+        lineChartLabels.push(item.algo_name + " (" + item.input_size + ")");
+        lineChartData.push(item.execution_time);
+        barChartLabels.push(item.algo_name + "(" + item.input_size + ")");
+        barChartData.push(item.execution_time);
+    });
+
+    lineChart.data.labels = lineChartLabels;
+    lineChart.data.datasets[0].data = lineChartData;
+    lineChart.update();
+    barChart.data.labels = barChartLabels;
+    barChart.data.datasets[0].data = barChartData;
+    barChart.update();
 }

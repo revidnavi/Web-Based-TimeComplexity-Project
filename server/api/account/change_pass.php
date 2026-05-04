@@ -2,6 +2,7 @@
 header("Content-Type: application/json");
 session_start();
 
+require_once __DIR__ . "/../cors.php";
 require_once __DIR__ . '/../../conf/dbase.php';
 require_once __DIR__ . '/../../db/users.php';
 require_once __DIR__ . '/../../lib/util.php';

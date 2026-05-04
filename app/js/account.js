@@ -36,7 +36,9 @@ function closeChangePasswordForm() {
 
 
 async function loadAccountInfo() {
-    const result = await fetch(API_URL+"/account/info.php");
+    const result = await fetch(API_URL+"/account/info.php", {
+        credentials: "include"
+    });
     const response = await result.json();
     console.log(response);
     if (response.success) {
@@ -68,6 +70,7 @@ async function changePassword() {
 
     const result = await fetch(API_URL+"/account/change_pass.php", {
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type":
             "application/json"
@@ -94,7 +97,9 @@ async function changePassword() {
 
 
 async function logout() {
-    const result = await fetch(API_URL+"/account/logout.php");
+    const result = await fetch(API_URL+"/account/logout.php", {
+        credentials: "include"
+    });
     const response = await result.json();
     if (response.success) {
         window.location.href = "auth.html";
@@ -104,7 +109,9 @@ async function logout() {
 
 
 async function showAdminButton() {
-    const result = await fetch(API_URL+"/home/get_user_type.php");
+    const result = await fetch(API_URL+"/home/get_user_type.php", {
+        credentials: "include"
+    });
     const response = await result.json();
     console.log(response);
     

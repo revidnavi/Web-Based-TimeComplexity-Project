@@ -3,7 +3,9 @@ let popupsLoaded = false
 async function loadPopups() {
     if (popupsLoaded) return
 
-    const res = await fetch("./assets/popups.html")
+    const res = await fetch("./assets/popups.html", {
+        credentials: "include"
+    })
     const html = await res.text()
 
     document.body.insertAdjacentHTML("beforeend", html)

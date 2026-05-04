@@ -107,7 +107,9 @@ function showHistory() {
 
 async function loadAlgorithms() {
     const select = document.getElementById("algorithm");
-    const result = await fetch(API_URL+"/home/get_active_algos.php");
+    const result = await fetch(API_URL+"/home/get_active_algos.php", {
+        credentials: "include"
+    });
     const response = await result.json();
     console.log(response);
     algos = response.data;
@@ -197,6 +199,7 @@ async function runAlgorithm() {
 
     const result = await fetch(API_URL+"/home/save_result.php", {
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type":
             "application/json"
@@ -215,7 +218,9 @@ async function runAlgorithm() {
 }
 
 async function showAdminButton() {
-    const result = await fetch(API_URL+"/home/get_user_type.php");
+    const result = await fetch(API_URL+"/home/get_user_type.php", {
+        credentials: "include"
+    });
     const response = await result.json();
     console.log(response);
     
@@ -230,7 +235,9 @@ async function showAdminButton() {
 }
 
 async function loadChartData() {
-    const lineResult = await fetch(API_URL + "/home/get_chart_data.php");
+    const lineResult = await fetch(API_URL + "/home/get_chart_data.php", {
+        credentials: "include"
+    });
     const lineResponse = await lineResult.json();
     if (!lineResponse.success) return;
 
@@ -260,7 +267,9 @@ async function loadChartData() {
     lineChart.data.datasets = lineDatasets;
     lineChart.update();
 
-    const barResult = await fetch(API_URL + "/home/get_chart_data.php");
+    const barResult = await fetch(API_URL + "/home/get_chart_data.php", {
+        credentials: "include"
+    });
     const barResponse = await barResult.json();
     if (!barResponse.success) return;
 

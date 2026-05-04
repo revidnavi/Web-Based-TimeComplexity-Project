@@ -1,6 +1,7 @@
 <?php
 header("Content-Type: application/json");
 
+require_once __DIR__ . "/../cors.php";
 require_once __DIR__ . '/../../conf/dbase.php';
 require_once __DIR__ . '/../../db/signup_codes.php';
 require_once __DIR__ . '/../../db/users.php';

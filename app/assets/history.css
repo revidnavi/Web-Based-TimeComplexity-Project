@@ -1,0 +1,190 @@
+/* ── History Page ─────────────────────────────────────────────────────────── */
+
+.history-page {
+    display: none;
+    padding: 24px 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.history-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(99, 140, 255, 0.08);
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+
+.history-header {
+    padding: 20px 24px;
+    background: #f0f6ff;
+    border-bottom: 1px solid #dbeafe;
+}
+
+.header-with-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.history-header h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e3a6e;
+    margin: 0 0 4px 0;
+}
+
+.history-header p {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0;
+}
+
+/* ── Clear All Button ─────────────────────────────────────────────────────── */
+
+.btn-clear {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #ef4444;
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.btn-clear:hover {
+    background: #dc2626;
+}
+
+.btn-clear:active {
+    transform: scale(0.95);
+}
+
+.btn-clear svg {
+    flex-shrink: 0;
+}
+
+/* ── Table ────────────────────────────────────────────────────────────────── */
+
+.card-content {
+    padding: 20px 24px;
+}
+
+#history-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+#history-table thead tr {
+    border-bottom: 2px solid #e2e8f0;
+}
+
+#history-table th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #374151;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+#history-table tbody tr {
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.15s ease;
+}
+
+#history-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+#history-table tbody tr:hover {
+    background: rgba(99, 140, 255, 0.05);
+}
+
+#history-table td {
+    padding: 12px 14px;
+    color: #1e293b;
+}
+
+/* Category badge */
+#history-table td:nth-child(2) {
+    color: #2563eb;
+}
+
+.category-badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    border: 1px solid #93c5fd;
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+/* Timestamp column */
+#history-table td:last-child {
+    color: #94a3b8;
+    font-size: 0.82rem;
+}
+
+.no-data {
+    text-align: center;
+    color: #94a3b8;
+    padding: 40px 0;
+    font-size: 0.9rem;
+}
+
+/* ── Pagination ───────────────────────────────────────────────────────────── */
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid #f1f5f9;
+    margin-top: 8px;
+}
+
+.pagination button {
+    padding: 8px 18px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #374151;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.pagination button:hover:not(:disabled) {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+}
+
+.pagination button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+#pageNumber {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 500;
+    min-width: 48px;
+    text-align: center;
+}

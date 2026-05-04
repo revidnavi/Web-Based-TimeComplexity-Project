@@ -133,6 +133,7 @@ function updateComplexity() {
 }
 
 async function runAlgorithm() {
+    if (algos.length == 0) return;
     let algoIndex = document.getElementById("algorithm").value;
     
     let algoID = algos[algoIndex].id;

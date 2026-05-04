@@ -10,7 +10,15 @@ login_block();
 
 try {
     $conn = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
-    $chartData = get_chart_data($conn, $_SESSION['userID']);
+    $inputs = json_decode(file_get_contents("php://input"), true);
+    $chartData = [];
+    
+    if ($inputs['chart'] == "line") {
+        $chartData = get_linechart_data($conn, $_SESSION['userID']);
+    }
+    elseif ($inputs['chart'] == "bar") {
+        $chartData = get_barchart_data($conn, $_SESSION['userID']);
+    }
 
     echo json_encode([
         "success" => true,

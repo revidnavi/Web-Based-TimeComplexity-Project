@@ -3,24 +3,52 @@ import { bubbleSort, mergeSort, binarySearch, linearSearch, fibonacciRecursive, 
 import { loginRedirect } from '../lib/util.js';
 
 let algos = [];
+
 const lineChart = new Chart(document.getElementById('lineChart'), {
   type: 'line',
   data: {
     labels: [],
-    datasets: [{
-      label: 'Execution Time vs Input Size',
-      data: []
-    }]
+    datasets: []
+  },
+  options: {
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Input Size'
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Execution Time'
+        }
+      }
+    }
   }
 });
+
 const barChart = new Chart(document.getElementById('barChart'), {
   type: 'bar',
   data: {
     labels: [],
-    datasets: [{
-      label: 'Execution Time Distribution',
-      data: []  
-    }]
+    datasets: []
+  },
+  options: {
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Input Size'
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Execution Time'
+        }
+      }
+    }
   }
 });
 
@@ -30,6 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     showAdminButton();
     updateComplexity(); 
     await loadChartData();
+    showAnalyzer();
     document.getElementById("home-button").addEventListener("click", openHome);
     document.getElementById("profile-button").addEventListener("click", openProfile);
     document.getElementById("goToAnalyzer").addEventListener("click", showAnalyzer);
@@ -38,8 +67,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("runButton").addEventListener("click", runAlgorithm);
     document.getElementById("algorithm").addEventListener("change", updateComplexity); 
 });
-
-showAnalyzer();
 
 function openProfile() {
     window.location.href = 'account.html';
@@ -201,33 +228,58 @@ async function showAdminButton() {
 }
 
 async function loadChartData() {
-    const result = await fetch(API_URL+"/home/get_chart_data.php");
-    const response = await result.json();
-    console.log(response);
-
-    let lineChartLabels = [];
-    let lineChartData = [];
-    let barChartLabels = [];
-    let barChartData = [];
-
-    lineChart.data.labels = lineChartLabels;
-    lineChart.data.datasets[0].data = lineChartData;
-    lineChart.update();
-    barChart.data.labels = barChartLabels;
-    barChart.data.datasets[0].data = barChartData;
-    barChart.update();
-
-    response.data.forEach(item => {
-        lineChartLabels.push(item.algo_name + " (" + item.input_size + ")");
-        lineChartData.push(item.execution_time);
-        barChartLabels.push(item.algo_name + "(" + item.input_size + ")");
-        barChartData.push(item.execution_time);
+    const lineResult = await fetch(API_URL + "/home/get_chart_data.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chart: "line" })
     });
 
-    lineChart.data.labels = lineChartLabels;
-    lineChart.data.datasets[0].data = lineChartData;
+    const lineResponse = await lineResult.json();
+    if (!lineResponse.success) return;
+
+    const lineData = lineResponse.data;
+
+    const labelsSet = new Set();
+    const lineDatasets = [];
+
+    Object.keys(lineData).forEach(algoName => {
+        const points = lineData[algoName];
+
+        const dataset = points.map(p => {
+            labelsSet.add(p.input_size);
+            return { x: p.input_size, y: p.execution_time };
+        });
+
+        lineDatasets.push({
+            label: algoName,
+            data: dataset,
+            borderWidth: 2
+        });
+    });
+
+    const labels = Array.from(labelsSet).sort((a, b) => a - b);
+
+    lineChart.data.labels = labels;
+    lineChart.data.datasets = lineDatasets;
     lineChart.update();
-    barChart.data.labels = barChartLabels;
-    barChart.data.datasets[0].data = barChartData;
+
+    const barResult = await fetch(API_URL + "/home/get_chart_data.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chart: "bar" })
+    });
+
+    const barResponse = await barResult.json();
+    if (!barResponse.success) return;
+
+    const barData = barResponse.data;
+
+    const barDatasets = Object.keys(barData).map(algoName => ({
+        label: algoName,
+        data: barData[algoName].map(p => p.execution_time)
+    }));
+
+    barChart.data.labels = labels;
+    barChart.data.datasets = barDatasets;
     barChart.update();
 }

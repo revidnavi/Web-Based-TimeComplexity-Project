@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . "/../cors.php";
+
 ini_set('display_errors', 0);
 set_exception_handler(function($e) {
     echo json_encode(['success' => false, 'message' => $e->getMessage()]);

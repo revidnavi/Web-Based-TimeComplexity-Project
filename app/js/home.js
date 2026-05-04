@@ -130,7 +130,9 @@ async function showHistory() {
 }
 
 async function loadHistory(page = 1) {
-    const response = await fetch(`${API_URL}/home/get_result.php?page=${page}`);
+    const response = await fetch(`${API_URL}/home/get_result.php?page=${page}`, {
+        credentials: "include"
+    });
     const result = await response.json();
 
     const tbody = document.getElementById("history-tbody");
@@ -184,6 +186,7 @@ async function clearHistory() {
 
     const result = await fetch(API_URL + "/home/clear_result.php", {
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json"
         }

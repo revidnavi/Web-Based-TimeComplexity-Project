@@ -23,13 +23,13 @@ body.account-page {
 
 .profile-card {
     width: 100%;
-    max-width: 440px;
+    max-width: 700px;
     margin: 1rem auto 0;
     padding: 0;
     gap: 0;
-    border: 1px solid #BEDBFF;
+    border: 0.5px solid #bfdbfe ;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(17, 24, 39, 0.08);
+    box-shadow: none;
     overflow: hidden;
     animation: fadeUp 0.3s ease both;
 }
@@ -39,27 +39,26 @@ body.account-page {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Card header strip ──────────────────────── */
+/* ── Card top strip ─────────────────────────── */
 
 .profile-card-header {
-    padding: 1.25rem 1.5rem;
-    background: linear-gradient(#EFF6FF, #F0F9FF);
-    border-bottom: 1px solid #BEDBFF;
+    padding: 1rem 1.25rem;
+    border-bottom: 0.5px solid #d7e3f2;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .profile-card-header-text h2 {
     margin: 0 0 2px;
-    font-size: 1rem;
-    font-weight: 700;
-    color: #1C398E;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
 }
 
 .profile-card-header-text p {
     margin: 0;
-    font-size: 0.75rem;
+    font-size: 12px;
     color: #64748b;
     font-weight: 400;
 }
@@ -67,20 +66,20 @@ body.account-page {
 /* ── Logout button ──────────────────────────── */
 
 .profile-card #logout {
-    font-size: 0.75rem;
-    padding: 6px 14px;
-    border-radius: 8px;
-    border: 1px solid #BEDBFF;
-    background: #ffffff;
-    color: #2563eb;
-    font-weight: 600;
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 6px;
+    border: 0.5px solid #e2e8f0;
+    background-color: rgb(1, 5, 80);
+    color: #dce1e8;
+    font-weight: bolder;
     cursor: pointer;
-    transition: background 0.15s, color 0.15s;
 }
 
 .profile-card #logout:hover {
-    background: #2563eb;
-    color: #ffffff;
+    background: #bfcddb;
+    color: #0f172a;
+    transition: none;
 }
 
 .profile-card #logout:active {
@@ -90,29 +89,27 @@ body.account-page {
 /* ── Admin link ─────────────────────────────── */
 
 .profile-card #admin-nav {
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 500;
     color: #2563eb;
     text-decoration: none;
-    padding: 6px 14px;
-    border: 1px solid #BEDBFF;
-    border-radius: 8px;
+    padding: 5px 12px;
+    border: 0.5px solid #bfdbfe;
+    border-radius: 6px;
     background: transparent;
-    margin-right: 0.5rem;
 }
 
 .profile-card #admin-nav:hover {
-    background: #EFF6FF;
+    background: #eff6ff;
 }
 
 /* ── Card body ──────────────────────────────── */
 
 .profile-card-body {
-    padding: 1.5rem;
+    padding: 1.25rem;
     display: flex;
     flex-direction: column;
     gap: 0;
-    background: #ffffff;
 }
 
 /* ── Fields ─────────────────────────────────── */
@@ -120,26 +117,26 @@ body.account-page {
 .profile-field {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    margin-bottom: 1rem;
+    gap: 4px;
+    margin-bottom: 12px;
 }
 
 .profile-field label {
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: #64748b;
+    font-size: 11px;
+    font-weight: 600;
+    color: #94a3b8;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
 }
 
 .profile-field input[readonly],
 .profile-field .field-value {
-    font-size: 0.875rem;
-    color: #1e293b;
-    background: #F8FAFC;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 10px 12px;
+    font-size: 13px;
+    color: #0f172a;
+    background: #f8fafc;
+    border: 0.5px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px;
     width: 100%;
     box-sizing: border-box;
     font-family: inherit;
@@ -151,18 +148,18 @@ body.account-page {
 
 .profile-card hr {
     border: none;
-    border-top: 1px solid #e2e8f0;
-    margin: 0.5rem 0 1.25rem;
+    border-top: 0.5px solid #e2e8f0;
+    margin: 4px 0 1.25rem;
 }
 
 /* ── Section label ───────────────────────────── */
 
 .profile-section-label {
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: #64748b;
+    font-size: 11px;
+    font-weight: 600;
+    color: #94a3b8;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
     margin: 0 0 10px;
 }
 
@@ -170,13 +167,13 @@ body.account-page {
 
 .profile-card #change-pass {
     width: 100%;
-    padding: 10px 12px;
-    font-size: 0.875rem;
+    padding: 8px 10px;
+    font-size: 13px;
     font-weight: 500;
-    border-radius: 8px;
-    border: 1px solid #e2e8f0;
-    background: #F8FAFC;
-    color: #1e293b;
+    border-radius: 6px;
+    border: 0.5px solid #e2e8f0;
+    background: #f8fafc;
+    color: #0f172a;
     cursor: pointer;
     font-family: inherit;
     text-align: left;
@@ -187,7 +184,7 @@ body.account-page {
 
 .profile-card #change-pass::after {
     content: '›';
-    font-size: 1.25rem;
+    font-size: 16px;
     color: #94a3b8;
     transition: transform 0.2s;
 }
@@ -197,31 +194,31 @@ body.account-page {
 }
 
 .profile-card #change-pass:hover {
-    background: #EFF6FF;
-    border-color: #BEDBFF;
+    background: #f1f5f9;
+    transition: none;
 }
 
 /* ── Change password form ────────────────────── */
 
 #change-pass-form {
-    margin-top: 10px;
+    margin-top: 8px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 1rem;
-    background: #F8FAFC;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
+    gap: 8px;
+    padding: 12px;
+    background: #f8fafc;
+    border: 0.5px solid #e2e8f0;
+    border-radius: 8px;
     animation: fadeUp 0.18s ease both;
 }
 
 #change-pass-form input[type="password"] {
-    padding: 10px 12px;
-    font-size: 0.875rem;
-    border-radius: 8px;
-    border: 1px solid #e2e8f0;
+    padding: 8px 10px;
+    font-size: 13px;
+    border-radius: 6px;
+    border: 0.5px solid #e2e8f0;
     background: #ffffff;
-    color: #1e293b;
+    color: #0f172a;
     font-family: inherit;
     outline: none;
     width: 100%;
@@ -231,27 +228,25 @@ body.account-page {
 
 #change-pass-form input[type="password"]:focus {
     border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .pass-form-actions {
     display: flex;
-    gap: 10px;
-    margin-top: 6px;
+    gap: 8px;
+    margin-top: 4px;
 }
 
 #change-pass-form #cancel-button {
     flex: 1;
-    padding: 8px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    border-radius: 8px;
-    border: 1px solid #e2e8f0;
-    background: #ffffff;
+    padding: 7px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 6px;
+    border: 0.5px solid #e2e8f0;
+    background: transparent;
     color: #64748b;
     cursor: pointer;
     font-family: inherit;
-    transition: background 0.15s;
 }
 
 #change-pass-form #cancel-button:hover {
@@ -260,16 +255,15 @@ body.account-page {
 
 #change-pass-form #submit-pass {
     flex: 2;
-    padding: 8px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    border-radius: 8px;
+    padding: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 6px;
     border: none;
-    background: linear-gradient(#155DFC, #1447E6);
+    background: #2563eb;
     color: #ffffff;
     cursor: pointer;
     font-family: inherit;
-    transition: background 0.15s;
 }
 
 #change-pass-form #submit-pass:hover {
@@ -278,4 +272,11 @@ body.account-page {
 
 #change-pass-form #submit-pass:active {
     transform: scale(0.97);
+}
+
+profile-button {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    background: #1d4ed8;
 }

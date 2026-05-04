@@ -1,0 +1,512 @@
+/* ============================================
+   admin.css  —  AlgoSpark Admin Panel
+   ============================================ */
+
+/* ── Page layout ─────────────────────────────── */
+
+body {
+    background: #F8FAFC;
+    min-height: 100vh;
+    height: auto;
+    overflow-y: auto;
+    padding-top: 96px;          /* clears the fixed header */
+    padding-bottom: 3rem;
+    box-sizing: border-box;
+    font-family: 'Inter', 'apple-system', 'BlinkMacSystemFont', 'Segoe UI', sans-serif;
+}
+
+body > hr {
+    display: none;              /* hide the raw <hr> after the header */
+}
+
+/* ── Shared section wrapper ───────────────────── */
+/* Both #dashboard and #algos sit inside this kind of container */
+
+#dashboard,
+#algos {
+    width: 92%;
+    max-width: 1100px;
+    margin: 2rem auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ── Section card (reuses .default-card look) ─── */
+
+.admin-card {
+    background: #ffffff;
+    border: 1px solid #BEDBFF;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(17, 24, 39, 0.08);
+    overflow: hidden;
+    margin-top: 2rem;  
+}
+
+/* Card gradient header — same as .default-card-head */
+.admin-card-head {
+    background: linear-gradient(#EFF6FF, #F0F9FF);
+    border-bottom: 1px solid #BEDBFF;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    
+}
+
+.admin-card-head h2 {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: #1C398E;
+    margin: 0;
+}
+
+.admin-card-head p {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin: 0;
+}
+
+/* Card body */
+.admin-card-body {
+    padding: 1.5rem;
+}
+
+/* ── Chart section ────────────────────────────── */
+
+#chart-container {
+    /* wrapped in .admin-card via JS or directly in HTML */
+}
+
+#theChart {
+    width: 100% !important;
+    max-height: 340px;
+}
+
+/* ── Users section ────────────────────────────── */
+
+#user-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+/* Individual user card */
+.user-card {
+    background: #F8FAFC;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.user-card:hover {
+    border-color: #BEDBFF;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+}
+
+/* Avatar initials circle */
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(#DBEAFE, #BFDBFE);
+    border: 1px solid #BEDBFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #1C398E;
+    margin-bottom: 6px;
+    flex-shrink: 0;
+}
+
+.user-card-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.user-card-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    min-width: 72px;
+    flex-shrink: 0;
+}
+
+.user-card-value {
+    font-size: 0.8125rem;
+    color: #1e293b;
+    word-break: break-all;
+}
+
+/* Status badge */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+
+.badge-active {
+    background: #DCFCE7;
+    color: #016630;
+    border: 1px solid #7BF1A8;
+}
+
+.badge-inactive {
+    background: #FEE2E2;
+    color: #991B1B;
+    border: 1px solid #FCA5A5;
+}
+
+/* Deactivate / activate button on user card */
+.deact-user {
+    margin-top: 8px;
+    align-self: flex-start;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid #FECACA;
+    background: #FEF2F2;
+    color: #DC2626;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.deact-user:hover {
+    background: #DC2626;
+    color: #ffffff;
+    border-color: #DC2626;
+}
+
+.deact-user:active { transform: scale(0.97); }
+
+/* When user is already inactive — button becomes "Activate" */
+.deact-user.activate {
+    border-color: #BEDBFF;
+    background: #EFF6FF;
+    color: #2563eb;
+}
+
+.deact-user.activate:hover {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+}
+
+/* ── Algorithms section ───────────────────────── */
+
+#algos-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Table-style header row */
+/* Columns: Name | Category | Best | Avg | Worst | Space | Status | Actions */
+.algo-list-header {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 0.9fr 0.9fr 0.9fr 0.9fr 90px 120px;
+    gap: 8px;
+    padding: 0 1rem 0.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.algo-list-header span {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* Individual algorithm card row */
+.algo-card {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 0.9fr 0.9fr 0.9fr 0.9fr 90px 120px;
+    gap: 8px;
+    align-items: center;
+    background: #F8FAFC;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    transition: border-color 0.15s;
+}
+
+.algo-card:hover {
+    border-color: #BEDBFF;
+    background: #ffffff;
+}
+
+.algo-card span {
+    font-size: 0.8125rem;
+    color: #1e293b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.algo-name {
+    font-weight: 600 !important;
+    color: #1C398E !important;
+}
+
+.algo-card .algo-actions {
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
+    padding-left: 8px;          /* breathing room between status badge and buttons */
+}
+
+/* Edit button */
+.edit-algo {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 7px;
+    border: 1px solid #BEDBFF;
+    background: #EFF6FF;
+    color: #2563eb;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+    white-space: nowrap;
+}
+
+.edit-algo:hover {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+/* Delete button */
+.delete-algo {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 7px;
+    border: 1px solid #FECACA;
+    background: #FEF2F2;
+    color: #DC2626;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+    white-space: nowrap;
+}
+
+.delete-algo:hover {
+    background: #DC2626;
+    color: #ffffff;
+    border-color: #DC2626;
+}
+
+.edit-algo:active,
+.delete-algo:active { transform: scale(0.97); }
+
+/* ── Add new algorithm button ─────────────────── */
+
+#new-algo-button {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 9px 18px;
+    border-radius: 9px;
+    border: none;
+    background: linear-gradient(#155DFC, #1447E6);
+    color: #ffffff;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.15s;
+}
+
+#new-algo-button::before {
+    content: '+';
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1;
+}
+
+#new-algo-button:hover { opacity: 0.88; }
+#new-algo-button:active { transform: scale(0.97); }
+
+/* ── Add / edit algorithm form ────────────────── */
+
+#algo-form {
+    background: #F8FAFC;
+    border: 1px solid #BEDBFF;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;           /* shown by JS, default hidden */
+    flex-direction: column;
+    gap: 1rem;
+    animation: fadeUp 0.2s ease both;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+#algo-form-title {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: #1C398E;
+    margin: 0 0 4px;
+}
+
+/* Two-column grid for the inputs */
+.algo-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+/* Full-width field inside the grid */
+.algo-form-grid .full {
+    grid-column: 1 / -1;
+}
+
+#algo-form input[type="text"],
+#algo-form input[type="hidden"] ~ * {
+    /* base input style */
+}
+
+#algo-form input[type="text"] {
+    padding: 10px 12px;
+    font-size: 0.875rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    color: #1e293b;
+    font-family: inherit;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+}
+
+#algo-form input[type="text"]:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Checkbox row */
+.algo-form-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.algo-form-check label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #1e293b;
+    cursor: pointer;
+}
+
+#algo-active {
+    width: 16px;
+    height: 16px;
+    accent-color: #2563eb;
+    cursor: pointer;
+}
+
+/* Form action buttons */
+.algo-form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+#submit-algo {
+    flex: 2;
+    padding: 9px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(#155DFC, #1447E6);
+    color: #ffffff;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+#submit-algo:hover { opacity: 0.88; }
+#submit-algo:active { transform: scale(0.97); }
+
+/* Cancel button for the form (add one in HTML if desired) */
+#cancel-algo {
+    flex: 1;
+    padding: 9px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    color: #64748b;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+#cancel-algo:hover { background: #f1f5f9; }
+
+/* ── Empty state ──────────────────────────────── */
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #94a3b8;
+    font-size: 0.875rem;
+}
+
+.empty-state strong {
+    display: block;
+    font-size: 1rem;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+
+/* ── Responsive ───────────────────────────────── */
+
+@media (max-width: 768px) {
+    #dashboard,
+    #algos {
+        width: 96%;
+    }
+
+    .algo-list-header,
+    .algo-card {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .algo-list-header { display: none; }
+
+    .algo-card {
+        grid-template-columns: 1fr auto;
+        gap: 6px 12px;
+    }
+
+    .algo-card span { grid-column: 1; }
+    .algo-card .algo-actions { grid-column: 2; grid-row: 1 / 3; align-self: center; flex-direction: column; }
+
+    .algo-form-grid { grid-template-columns: 1fr; }
+    .algo-form-grid .full { grid-column: 1; }
+
+    #user-container { grid-template-columns: 1fr; }
+}

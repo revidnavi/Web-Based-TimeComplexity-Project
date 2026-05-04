@@ -66,6 +66,7 @@ async function updateAlgo() {
 
     let result = await fetch(API_URL+"/admin/update_algo.php", {
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json"
         },
@@ -91,7 +92,9 @@ async function updateAlgo() {
 }
 
 async function loadAlgos() {
-    const result = await fetch(API_URL+"/admin/get_algos.php");
+    const result = await fetch(API_URL+"/admin/get_algos.php", {
+        credentials: "include"
+    });
     const response = await result.json();
     console.log(response);
 
@@ -139,6 +142,7 @@ async function loadAlgos() {
             
             let result = await fetch(API_URL+"/admin/delete_algo.php", {
                 method: "POST",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json"
                 },

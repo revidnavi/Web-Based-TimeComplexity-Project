@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="assets/reset.css">
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/popups.css">
@@ -125,13 +126,19 @@
     <!-- Charts Page  -->
 
     <div class="charts-page">
-        <div class="linechart-card">
-            <div></div>
-            <div></div>
+        <div class="default-card">
+            <div class="default-card-head">
+                <p class="main-text">Execution Time vs Input Size</p>
+                <p class="sub-text">Line chart showing how execution time grows with input size</p> 
+            </div>
+                <canvas id="lineChart"></canvas>
         </div>
-        <div class="barchart-card">
-            <div></div>
-            <div></div>
+        <div class="default-card">
+            <div class="default-card-head">
+                <p class="main-text">Execution Time Distribution</p>
+                <p class="sub-text">Bar chart comparing execution times across different input sizes</p>
+            </div>
+                <canvas id="barChart"></canvas>
         </div>
     </div>
 

@@ -50,6 +50,7 @@ async function requestEmailCode() {
 
     const result = await fetch(API_URL+"/auth/signup_code.php", {
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type":
             "application/json"
@@ -101,6 +102,7 @@ async function signup() {
 
     const result = await fetch(API_URL+"/auth/signup.php", {
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type":
             "application/json"
@@ -153,6 +155,7 @@ async function login() {
    
     const result = await fetch(API_URL+"/auth/login.php", {
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type":
             "application/json"

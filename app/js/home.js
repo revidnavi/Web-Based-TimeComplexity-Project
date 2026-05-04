@@ -4,15 +4,64 @@ import { loginRedirect } from '../lib/util.js';
 import { popupConfirm } from '../lib/popups.js'
 
 let algos = [];
-
 let currentPage = 1;
 let totalPages = 1;
+
+const lineChart = new Chart(document.getElementById('lineChart'), {
+  type: 'line',
+  data: {
+    labels: [],
+    datasets: []
+  },
+  options: {
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Input Size'
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Execution Time'
+        }
+      }
+    }
+  }
+});
+
+const barChart = new Chart(document.getElementById('barChart'), {
+  type: 'bar',
+  data: {
+    labels: [],
+    datasets: []
+  },
+  options: {
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Input Size'
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Execution Time'
+        }
+      }
+    }
+  }
+});
 
 document.addEventListener("DOMContentLoaded", async () => {   
     loginRedirect("home.html");
     await loadAlgorithms();
     showAdminButton();
     updateComplexity(); 
+    await loadChartData();
+    showAnalyzer();
     document.getElementById("home-button").addEventListener("click", openHome);
     document.getElementById("profile-button").addEventListener("click", openProfile);
     document.getElementById("goToAnalyzer").addEventListener("click", showAnalyzer);
@@ -24,8 +73,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     initPagination();
 });
-
-showAnalyzer();
 
 function openProfile() {
     window.location.href = 'account.html';
@@ -45,7 +92,8 @@ function showAnalyzer() {
 }
 
 
-function showCharts() {
+async function showCharts() {
+    await loadChartData();
     document.getElementById("analyzer-page").style.display = "none";
     document.querySelector(".charts-page").style.display = "block";
     document.querySelector(".history-page").style.display = "none";
@@ -157,7 +205,9 @@ async function clearHistory() {
 
 async function loadAlgorithms() {
     const select = document.getElementById("algorithm");
-    const result = await fetch(API_URL+"/home/get_active_algos.php");
+    const result = await fetch(API_URL+"/home/get_active_algos.php", {
+        credentials: "include"
+    });
     const response = await result.json();
     console.log(response);
     algos = response.data;
@@ -173,6 +223,7 @@ async function loadAlgorithms() {
 }
 
 function updateComplexity() {
+    if (algos.length == 0) return;
     let algoIndex = document.getElementById("algorithm").value;
     document.getElementById('complexityCard').style.display = "flex";
     document.getElementById('best-time').innerText = "Best: " + algos[algoIndex].time_best;
@@ -182,6 +233,7 @@ function updateComplexity() {
 }
 
 async function runAlgorithm() {
+    if (algos.length == 0) return;
     let algoIndex = document.getElementById("algorithm").value;
     
     let algoID = algos[algoIndex].id;
@@ -245,6 +297,7 @@ async function runAlgorithm() {
 
     const result = await fetch(API_URL+"/home/save_result.php", {
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type":
             "application/json"
@@ -263,7 +316,9 @@ async function runAlgorithm() {
 }
 
 async function showAdminButton() {
-    const result = await fetch(API_URL+"/home/get_user_type.php");
+    const result = await fetch(API_URL+"/home/get_user_type.php", {
+        credentials: "include"
+    });
     const response = await result.json();
     console.log(response);
     
@@ -275,4 +330,55 @@ async function showAdminButton() {
             adminNav.style.display = "inline";
         }
     }
+}
+
+async function loadChartData() {
+    const lineResult = await fetch(API_URL + "/home/get_chart_data.php", {
+        credentials: "include"
+    });
+    const lineResponse = await lineResult.json();
+    if (!lineResponse.success) return;
+
+    const lineData = lineResponse.data;
+
+    const labelsSet = new Set();
+    const lineDatasets = [];
+
+    Object.keys(lineData).forEach(algoName => {
+        const points = lineData[algoName];
+
+        const dataset = points.map(p => {
+            labelsSet.add(p.input_size);
+            return { x: p.input_size, y: p.execution_time };
+        });
+
+        lineDatasets.push({
+            label: algoName,
+            data: dataset,
+            borderWidth: 2
+        });
+    });
+
+    const labels = Array.from(labelsSet).sort((a, b) => a - b);
+
+    lineChart.data.labels = labels;
+    lineChart.data.datasets = lineDatasets;
+    lineChart.update();
+
+    const barResult = await fetch(API_URL + "/home/get_chart_data.php", {
+        credentials: "include"
+    });
+    const barResponse = await barResult.json();
+    if (!barResponse.success) return;
+
+    const barData = barResponse.data;
+
+    const barDatasets = Object.keys(barData).map(algoName => ({
+        label: algoName,
+        data: barData[algoName].map(p => p.execution_time)
+    }));
+
+    barChart.data.labels = labels;
+    barChart.data.datasets = barDatasets;
+    barChart.update();
 }

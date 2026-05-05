@@ -2,6 +2,7 @@ import { API_URL } from '../conf/api.js';
 import { bubbleSort, mergeSort, binarySearch, linearSearch, fibonacciRecursive, fibonacciDP } from '../lib/algorithms.js';
 import { loginRedirect } from '../lib/util.js';
 import { popupConfirm } from '../lib/popups.js'
+import { showToast } from '../lib/toast.js';
 
 let algos = [];
 let currentPage = 1;

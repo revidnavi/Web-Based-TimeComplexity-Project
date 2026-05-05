@@ -112,3 +112,26 @@
 .icon-warning {
     color: orange;
 }
+
+/* Slider  */
+
+.size-input-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+#sizeSlider {
+    flex: 1;
+    min-width: 0;
+    accent-color: #2563eb;
+    cursor: pointer;
+}
+
+#size {
+    width: 90px;
+    flex-shrink: 0;
+    padding: 14px 16px; /* keep your existing padding */
+    text-align: center;
+}

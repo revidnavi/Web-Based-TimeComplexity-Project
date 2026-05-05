@@ -63,6 +63,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     updateComplexity(); 
     await loadChartData();
     showAnalyzer();
+    initSizeSlider();
+    
     document.getElementById("home-button").addEventListener("click", openHome);
     document.getElementById("profile-button").addEventListener("click", openProfile);
     document.getElementById("goToAnalyzer").addEventListener("click", showAnalyzer);
@@ -114,6 +116,19 @@ function initPagination() {
         if (currentPage > 1) {
             loadHistory(currentPage - 1);
         }
+    });
+}
+
+function initSizeSlider() {
+    const slider = document.getElementById("sizeSlider");
+    const sizeInput = document.getElementById("size");
+
+    slider.addEventListener("input", () => {
+        sizeInput.value = slider.value;
+    });
+
+    sizeInput.addEventListener("input", () => {
+        slider.value = sizeInput.value;
     });
 }
 
@@ -249,6 +264,10 @@ async function runAlgorithm() {
     else if (size > 38 && algos[algoIndex].algo_name == "Recursive Fibonacci") {
         showToast('Warning', "Input size too large for Recursive Fibonacci. Please enter 38 or less.", 'warning');
         return;
+
+    } else if (size > 100000 && algos[algoIndex].algo_name == "Bubble Sort") {
+        showToast('Warning', "Large input size may freeze the browser for Bubble Sort.", 'warning');
+        return;
     }
     let space = 0;
     let target = 0;
@@ -304,7 +323,7 @@ async function runAlgorithm() {
     document.getElementById("resultsCard").style.display = "flex";
 
     document.getElementById("resultSize").innerText = size;
-    document.getElementById("resultTime").innerText = time;
+    document.getElementById("resultTime").innerText = time.toFixed(4) + " ms";
     document.getElementById("resultTimestamp").innerText = new Date().toLocaleString();
 
     const result = await fetch(API_URL+"/home/save_result.php", {
@@ -322,7 +341,18 @@ async function runAlgorithm() {
 
     if (data.redirect) {
         window.location.href = data.redirect;
+        return;
     }
+
+    if (data.success) {
+    showToast(
+        "Run Complete", 
+        `${algos[algoIndex].algo_name} executed in ${time.toFixed(3)}ms with input size ${size}.`, 
+        "success"
+    );
+    } else {
+    showToast("Error", "Failed to save result.", "error");
+}
 
     console.log(data); // replace with popup (if successful or not)
 }

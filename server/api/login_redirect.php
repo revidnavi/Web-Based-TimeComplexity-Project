@@ -8,7 +8,6 @@ require_once __DIR__ . "/../conf/dbase.php";
 require_once __DIR__ . "/../db/users.php";
 
 try {
-    $conn = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
     $inputs = json_decode(file_get_contents("php://input"), true);
     $currentPage = $inputs['currentPage'];
 }
@@ -21,6 +20,7 @@ catch (Exception $e) {
 $loggedInUserID = $_SESSION['userID'] ?? null;
 $loggedInUserType = $_SESSION['userType'] ?? null;
 
+$conn = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 if (isset($loggedInUserID) && get_user_type($conn, $loggedInUserID) == null) {
     $_SESSION = array();
     session_destroy();

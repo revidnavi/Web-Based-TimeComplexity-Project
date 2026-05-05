@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/utilities.css">
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/reset.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -48,7 +49,7 @@
             <input type="password" id="signupPass0" placeholder="Enter Password" required>
             <label>Confirm Password</label>
             <input type="password" id="signupPass1" placeholder="Confirm Password" required>
-            <button class="pageButton" id="sendCodeButton">Send Verification Code</button>
+            <button class="custom-buttons" id="sendCodeButton">Send Verification Code</button>
         </div>
 
         <!-- Verification Page -->
@@ -63,8 +64,8 @@
                 </div>
                 <label>Enter 6-digit Code</label>
                 <input type="text" id="emailCode" placeholder="123456" maxlength="6" required>
-                <button class="pageButton" id="signupButton">Verify & Create Account</button>
-                <button class="pageButton" id="changeEmailButton">Change Email</button>
+                <button class="custom-buttons" id="signupButton">Verify & Create Account</button>
+                <button class="custom-buttons" id="changeEmailButton">Change Email</button>
         </div>
     </div>
 
@@ -75,7 +76,7 @@
         <input type="text" id="loginEmail" placeholder="Enter email" required>
         <label for="password">Password</label>
         <input type="password" id="loginPass" placeholder="Enter password" required>
-        <button class="pageButton" id="loginButton" type="submit">Log In</button> 
+        <button class="custom-buttons" id="loginButton" type="submit">Log In</button> 
         </div>
        
     </div>

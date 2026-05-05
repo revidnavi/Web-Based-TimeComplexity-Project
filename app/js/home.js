@@ -241,6 +241,14 @@ async function runAlgorithm() {
     
     let algoID = algos[algoIndex].id;
     let size = document.getElementById("size").value;
+    if (size < 1) {
+        showToast('Warning', "Input size must be at least 1 or greater", 'warning');
+        return;
+    }
+    else if (size > 38 && algos[algoIndex].algo_name == "Recursive Fibonacci") {
+        showToast('Warning', "Input size too large for Recursive Fibonacci. Please enter 38 or less.", 'warning');
+        return;
+    }
     let space = 0;
     let target = 0;
 
@@ -270,7 +278,7 @@ async function runAlgorithm() {
     break;
     case "Recursive Fibonacci":
         space = size;
-        fibonacciRecursive(Math.min(size, 38));
+        fibonacciRecursive(size);
     break;
     case "Dynamic Fibonacci":
         space = size;

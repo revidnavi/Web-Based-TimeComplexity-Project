@@ -135,3 +135,44 @@
     padding: 14px 16px; /* keep your existing padding */
     text-align: center;
 }
+
+/* Pop Up  */
+
+
+.popup-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.popup-confirm {
+    padding: 10px 28px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.popup-confirm:hover {
+    background: #1d4ed8;
+}
+
+.popup-cancel {
+    padding: 10px 28px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #374151;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.popup-cancel:hover {
+    background: #f1f5f9;
+}

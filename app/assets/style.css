@@ -368,11 +368,21 @@ body.home-page {
     transform: scale(0.95);
 }
 
-#logoutButton { }
-
 .homeSwitch {
     background-color: #DBEAFE;
-    margin-top: 120px;
+    margin-top: 0;
+}
+
+.homeSwitch-card {
+    position: fixed;
+    top: 81px;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: #F8FAFC;
+    display: flex;
+    justify-content: center;
+    padding: 8px 0;
 }
 
 .case {
@@ -446,7 +456,13 @@ body.home-page {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 150px;
 }
+
+.charts-page {
+    margin-top: 150px;
+}
+
 
 .default-card {
     background-color: #ffffff;
@@ -559,5 +575,4 @@ body.home-page {
     font-weight: 600;
     margin-bottom: 0.25rem;
 }
-
 

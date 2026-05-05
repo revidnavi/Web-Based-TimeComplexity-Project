@@ -26,7 +26,7 @@ body.home-page {
     font-weight: bold;
     padding: 10px;
     color: white;
-    background-color: #2563eb;
+    background: linear-gradient(#155DFC,#1447E6);
     border-radius: 10px;
     border: none;
     cursor: pointer;
@@ -34,9 +34,7 @@ body.home-page {
 }
 
 .pageButton:hover {
-    background-color: #022164;
-    transition: ease-in 0.2s ;
-    transition-duration: 200ms;
+    background: linear-gradient(#2b7bff, #1a56ff)
 }
 
 .pageButton:active {
@@ -528,13 +526,20 @@ body.home-page {
 
 #runButton {
     background: linear-gradient(#155DFC,#1447E6);
-    background-color: #F8FAFC;
     color: #ffffff;
     border: none;
     outline: none;
-
     padding: 14px 16px;
     border-radius: 0.75rem;
+    cursor: pointer;
+}
+
+#runButton:hover {
+    background: linear-gradient(#2b7bff, #1a56ff)
+}
+
+#runButton:active {
+    transform: translateY(1px);
 }
 
 .result {

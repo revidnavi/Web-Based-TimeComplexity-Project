@@ -43,7 +43,7 @@ async function loadAccountInfo() {
     console.log(response);
     if (response.success) {
         document.getElementById("email").value = response.data.email;
-        document.getElementById("date").innerText = response.data.created_at;
+        document.getElementById("date").value = response.data.created_at;
     }
     else {
         window.location.href = "home.html";

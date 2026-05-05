@@ -2,13 +2,13 @@
 
 ## Checklist
 
-1. Install XAMPP - Run Apache and MySQL
-2. Project folder into htdocs folder
-3. Initiliaze database (commands below)
-4. Configure variables:
+1. Initiliaze database (commands below)
+2. Configure variables:
     - Server URL (see in /app/conf/api.js)
     - Email Password (configure and copy email.php to folder /server/conf)
     - Database Credentials (see in /server/conf/dbase.php)
+
+- For configuring https (see in /server/api/cors.php)
 
 ## Database Schema
 

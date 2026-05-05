@@ -1,0 +1,248 @@
+/* ── Algos Page ───────────────────────────────────────────────────────────── */
+
+#algos {
+    padding: 24px 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ── Algo Cards Container ─────────────────────────────────────────────────── */
+
+#algos-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.algo-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr 1fr 0.6fr auto auto;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 1px 4px rgba(99, 140, 255, 0.06);
+    transition: box-shadow 0.15s ease;
+}
+
+.algo-card:hover {
+    box-shadow: 0 4px 12px rgba(99, 140, 255, 0.12);
+}
+
+/* Column headers row */
+.algo-cards-header {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr 1fr 0.6fr auto auto;
+    gap: 12px;
+    padding: 8px 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.algo-card .algo-name {
+    font-weight: 600;
+    color: #1e3a6e;
+    font-size: 0.9rem;
+}
+
+.algo-card .category {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: #dbeafe;
+    color: #2563eb;
+    border: 1px solid #93c5fd;
+    white-space: nowrap;
+}
+
+.algo-card .time-best,
+.algo-card .time-avg,
+.algo-card .time-worst,
+.algo-card .space-complexity {
+    font-size: 0.82rem;
+    color: #475569;
+    font-family: monospace;
+}
+
+.algo-card .active {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.algo-card .active.is-active {
+    background: #dcfce7;
+    color: #16a34a;
+    border: 1px solid #86efac;
+}
+
+.algo-card .active.is-inactive {
+    background: #fee2e2;
+    color: #dc2626;
+    border: 1px solid #fca5a5;
+}
+
+/* ── Edit / Delete Buttons ────────────────────────────────────────────────── */
+
+.edit-algo {
+    padding: 6px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #374151;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    white-space: nowrap;
+}
+
+.edit-algo:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+}
+
+.delete-algo {
+    padding: 6px 14px;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    background: #fff5f5;
+    color: #dc2626;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    white-space: nowrap;
+}
+
+.delete-algo:hover {
+    background: #fee2e2;
+    border-color: #ef4444;
+}
+
+/* ── Divider ──────────────────────────────────────────────────────────────── */
+
+#algos hr {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 24px 0;
+}
+
+/* ── Add New Algorithm Button ─────────────────────────────────────────────── */
+
+#new-algo-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+    margin-bottom: 20px;
+}
+
+#new-algo-button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+#new-algo-button::before {
+    content: "+";
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* ── Algo Form ────────────────────────────────────────────────────────────── */
+
+#algo-form {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(99, 140, 255, 0.08);
+    max-width: 560px;
+}
+
+#algo-form-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e3a6e;
+    margin: 0 0 20px 0;
+}
+
+#algo-form input[type="text"],
+#algo-form input[type="number"] {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    color: #1e293b;
+    background: #f8fafc;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    outline: none;
+}
+
+#algo-form input[type="text"]:focus,
+#algo-form input[type="number"]:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    background: #ffffff;
+}
+
+/* Active checkbox row */
+.algo-active-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#algo-form label {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+#algo-form input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #2563eb;
+    cursor: pointer;
+}
+
+#submit-algo {
+    width: 100%;
+    padding: 11px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+}
+
+#submit-algo:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}

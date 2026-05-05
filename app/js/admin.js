@@ -259,6 +259,8 @@ async function loadUsers() {
         userCard.querySelector(".deact-user").addEventListener("click", async () => {
             let confirmedDelete = await popupConfirm("Are you sure you want to de/activate this user?");
 
+            if (!confirmedDelete) return;
+
             const result = await fetch(API_URL+"/admin/edit_user_attribute.php", {
                 method: "POST",
                 credentials: "include",
